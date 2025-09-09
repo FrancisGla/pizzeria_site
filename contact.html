@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=4.0">
+  <title>Contact - La Prestige du Dolloir</title>
+  <link rel="stylesheet" href="style.css?v=3.0">
+  <style>
+    #retryCaptcha {
+      display: none;
+      margin-top: 15px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background: #d4af37;
+      color: #1a1a1a;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    #retryCaptcha:hover {
+      background: #b8962f;
+      transform: translateY(-2px);
+    }
+    .captcha-info {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-top: 8px;
+      color: #000; /* noir */
+      text-align: center;
+    }
+    .timer {
+      font-weight: bold;
+      margin-top: 5px;
+      color: #ff4444;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  
+<header class="banner">
+  <img src="images/banner.jpg" alt="Bannière">
+</header>
+
+<nav>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <div class="menu-links">
+    <a href="index.html">Accueil</a>
+    <a href="menu.html">Menu</a>
+    <a href="galerie.html">Galerie</a>
+    <a href="apropos.html">À propos</a>
+    <a href="traiteur.html" class="active">Traiteur</a> <!-- ✅ nouvel onglet -->
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<section>
+  <h2>Contact</h2>
+  <p class="site-text">Adresse : 8 Grande Rue, 02570 Chézy-sur-Marne</p>
+  <iframe src="https://www.google.com/maps?q=163+Rue+des+Prairies,+24350+Lisle&output=embed"
+    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+</section>
+
+<!-- Section contact -->
+<section class="contact-section">
+  <div class="contact-card">
+    <h3>Contactez-nous</h3>
+    <form id="contactForm" class="contact-form" action="send.php" method="post">
+      
+      <div class="contact-row">
+        <div class="field">
+          <label for="prenom">Prénom <span class="required">*</span></label>
+          <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
+        </div>
+        <div class="field">
+          <label for="nom">Nom <span class="required">*</span></label>
+          <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+        </div>
+      </div>
+      
+      <div class="field email-field">
+        <label for="email">Email <span class="required">*</span></label>
+        <input type="email" id="email" name="email" placeholder="Votre email" required>
+      </div>
+      
+      <div class="field message-field">
+        <label for="message">Message <span class="required">*</span></label>
+        <textarea id="message" name="message" placeholder="Votre message" rows="5" required></textarea>
+      </div>
+
+      <!-- Honeypots (invisibles) -->
+      <input type="text" id="website" name="website" style="display:none">
+      <input type="text" id="nickname" name="nickname" style="display:none">
+
+      <!-- CAPTCHA -->
+      <div class="field captcha-field">
+        <label id="captchaLabel"></label>
+        <input type="number" id="captcha" name="captcha" placeholder="Votre réponse" required>
+        <p id="captchaInfo" class="captcha-info"></p>
+        <!-- Horloge analogique -->
+        <canvas id="captchaClock" width="120" height="120" style="display:block; margin:10px auto;"></canvas>
+        <p id="timer" class="timer"></p>
+      </div>
+
+      <!-- Bouton réessayer -->
+      <button type="button" id="retryCaptcha">Voulez-vous tenter une nouvelle opération ?</button>
+      
+      <!-- Bouton envoyer -->
+      <button type="submit" class="btn-primary">Envoyer</button>
+      
+      <p class="form-hint">
+        Merci de renseigner votre prénom, nom et email pour que nous puissions vous répondre.<br>
+        Nous vous répondrons dans un délai de 24 à 48 heures.
+      </p>
+      <p class="form-hint"><span class="required">*</span> Champs obligatoires</p>
+    </form>
+  </div>
+</section>
+
+<h1 class="site-title">La Prestige du Dolloir</h1>
+<footer>
+   <p>© 2025 La Prestige du Dolloir - Tous droits réservés - Auteur : Francis Glavieux</p>
+</footer>
+
+<!-- Appel du script -->
+<script src="script.js?v=3.0" defer></script>
+</body>
+</html>
