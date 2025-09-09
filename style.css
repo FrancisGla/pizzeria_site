@@ -45,7 +45,6 @@ nav {
   align-items: center;
   background: #1a1a1a;
   padding: 10px;
-
 }
 
 nav a {
@@ -65,13 +64,6 @@ nav a:hover {
   color: #fff;
   transform: translateY(-3px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-
-.menu-links {
-  display: flex;         /* place les liens en ligne */
-  flex-wrap: wrap;       /* autorise le retour à la ligne */
-  justify-content: center;
-  gap: 12px;             /* espace horizontal/vertical entre boutons */
 }
 
 .menu-toggle {
@@ -269,7 +261,7 @@ h1, h2 {
 body::after {
   content: "";
   display: block;
-  height: 60px; /* adapte à la hauteur du footer */
+  height: 60px;
 }
 
 /* ===== Footer ===== */
@@ -488,12 +480,29 @@ footer {
 
 /* ===== Responsive ===== */
 @media (max-width: 720px) {
-  .contact-row {
-    flex-direction: column;
-    gap: 20px;
+  /* Texte réduit */
+  h1 { font-size: 1.2rem; }
+  h2 { font-size: 1rem; }
+  h3 { font-size: 0.9rem; }
+  p, .site-text { font-size: 0.8rem; }
+
+  /* Boutons réduits */
+  .btn-primary {
+    font-size: 0.8rem;
+    padding: 6px 12px;
   }
 
-  .btn-primary {
-    width: 100%;
+  /* Images réduites */
+  .featured-dish img,
+  .card img,
+  .gallery img {
+    max-width: 50%;
+  }
+
+  /* Espacement nav adapté */
+  nav a {
+    font-size: 0.9rem;
+    padding: 8px 14px;
+    margin: 4px;
   }
 }
