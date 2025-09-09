@@ -487,51 +487,61 @@ footer {
 
   /* Bannière réduite en largeur et hauteur */
   header.banner img {
-    height: 80px;     /* moitié hauteur */
-    width: 75%;       /* moitié largeur */
-    margin: 0 auto;   /* centrer l’image réduite */
+    height: 80px;     
+    width: 95%;       
+    margin: 0 auto;   
     display: block;
   }
 
   nav {
-    top: 80px;      /* ajuste car bannière réduite */
+    top: 80px;      
   }
 
   body {
-    padding-top: 120px;  /* compense bannière + menu réduits */
-    padding-bottom: 50px; /* compense footer réduit */
+    padding-top: 120px;  
+    padding-bottom: 50px; 
   }
 
   /* Footer réduit en largeur et hauteur */
   footer {
-    padding: 9px 10px;   /* moitié padding */
-    font-size: 0.8rem;   /* texte réduit */
-    width: 75%;          /* largeur réduite */
-    margin: 0 auto;      /* centré */
-    border-radius: 8px;  /* arrondi pour ressembler à un bloc */
+    padding: 9px 10px;   
+    font-size: 0.8rem;   
+    width: 95%;          
+    margin: 0 auto;      
+    border-radius: 8px;  
   }
 
   /* Bloc contact réduit */
-.contact-card {
-  max-width: 75%;      /* largeur réduite */
-  padding: 10px 8px;   /* 🔹 espace interne encore plus petit */
-  font-size: 0.85rem;  /* texte légèrement réduit */
-  margin: 0 auto;      /* centré */
-}
+  .contact-card {
+    max-width: 90%;      
+    padding: 10px 8px;   
+    font-size: 0.85rem;  
+    margin: 0 auto;      
+  }
 
-/* Champs dans le formulaire */
-.contact-card input,
-.contact-card textarea {
-  width: 75%;          /* 🔹 réduit la largeur des champs */
-  padding: 8px 10px;   /* 🔹 réduit la hauteur interne des champs */
-  font-size: 0.85rem;  /* texte un peu plus petit */
-  box-sizing: border-box; /* évite le débordement */
-}
+  /* Organisation du formulaire en colonne */
+  .contact-form {
+    display: flex;
+    flex-direction: column; /* empile les champs */
+    align-items: center;    /* centre horizontalement */
+    gap: 12px;              /* espace entre chaque champ */
+  }
 
+  /* Champs dans le formulaire */
+  .contact-card input,
+  .contact-card textarea {
+    width: 90%;        
+    padding: 8px 10px; 
+    font-size: 0.85rem;
+    margin: 0 auto;    
+    display: block;    
+    box-sizing: border-box;
+  }
 
+  /* Forcer Email et Message à s’aligner avec les autres */
   .field.email-field,
   .field.message-field textarea {
-    width: 100% !important;   /* supprime les overrides (104%, 97%) */
+    width: 90% !important; 
   }
 
   /* Conteneur des liens → flex + wrap + gap */
@@ -546,13 +556,13 @@ footer {
   nav a {
     font-size: 0.9rem;
     padding: 4px 7px;
-    margin: 0;   /* on laisse gap gérer l’espacement */
+    margin: 0;   
   }
 
   /* Images gardent le zoom */
   .featured-dish img,
   .card img,
   .gallery img {
-    max-width: 60%;  /* réduites mais zoom possible */
+    max-width: 60%;  
   }
 }
