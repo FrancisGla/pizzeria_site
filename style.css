@@ -488,7 +488,7 @@ footer {
   /* Bannière réduite en largeur et hauteur */
   header.banner img {
     height: 80px;     
-    width: 95%;       
+    width: 100%;       
     margin: 0 auto;   
     display: block;
   }
@@ -506,7 +506,7 @@ footer {
   footer {
     padding: 9px 10px;   
     font-size: 0.8rem;   
-    width: 95%;          
+    width: 100%;          
     margin: 0 auto;      
     border-radius: 8px;  
   }
