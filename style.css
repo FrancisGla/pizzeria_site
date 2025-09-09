@@ -477,7 +477,6 @@ footer {
   color: #000;
   margin-top: 8px;
 }
-
 /* ===== Responsive ===== */
 @media (max-width: 720px) {
   /* Texte réduit */
@@ -486,45 +485,59 @@ footer {
   h3 { font-size: 0.9rem; }
   p, .site-text { font-size: 0.8rem; }
 
-  /* Bannière réduite de moitié */
+  /* Bannière réduite en largeur et hauteur */
   header.banner img {
-    height: 60px;   /* au lieu de 160px */
+    height: 80px;     /* moitié hauteur */
+    width: 50%;       /* moitié largeur */
+    margin: 0 auto;   /* centrer l’image réduite */
+    display: block;
   }
 
   nav {
-    top: 60px;      /* ajustement car la bannière est plus petite */
+    top: 80px;      /* ajuste car bannière réduite */
   }
 
   body {
-    padding-top: 120px; /* compense bannière + menu réduits */
+    padding-top: 120px;  /* compense bannière + menu réduits */
     padding-bottom: 50px; /* compense footer réduit */
   }
 
-  /* Footer réduit de moitié */
+  /* Footer réduit en largeur et hauteur */
   footer {
-    padding: 6px 7px; /* au lieu de 18px 15px */
-    font-size: 0.5rem; /* texte du footer réduit */
+    padding: 9px 10px;   /* moitié padding */
+    font-size: 0.8rem;   /* texte réduit */
+    width: 50%;          /* largeur réduite */
+    margin: 0 auto;      /* centré */
+    border-radius: 8px;  /* arrondi pour qu’il ressemble à un bloc */
+  }
+
+  /* Bloc contact réduit */
+  .contact-card {
+    max-width: 50%;      /* largeur réduite à moitié */
+    padding: 20px 15px;  /* réduit l’espace interne */
+    font-size: 0.9rem;   /* texte ajusté */
+    margin: 0 auto;      /* centré */
   }
 
   /* Conteneur des liens → flex + wrap + gap */
   .menu-links {
     display: flex;
-    flex-wrap: wrap;          /* permet le retour à la ligne */
-    justify-content: center;  /* centre les boutons */
-    gap: 12px 18px;           /* 🔹 espace horizontal et vertical */
+    flex-wrap: wrap;         
+    justify-content: center; 
+    gap: 12px 18px;          
   }
 
   /* Boutons réduits + espacés */
   nav a {
     font-size: 0.9rem;
     padding: 4px 7px;
-    margin: 0;   /* 🔹 on laisse gap gérer l’espacement */
+    margin: 0;   /* on laisse gap gérer l’espacement */
   }
 
   /* Images gardent le zoom */
   .featured-dish img,
   .card img,
   .gallery img {
-    max-width: 60%;  /* 🔹 réduites mais toujours zoomables */
+    max-width: 60%;  /* réduites mais zoom possible */
   }
 }
