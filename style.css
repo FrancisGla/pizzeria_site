@@ -488,11 +488,11 @@ footer {
 
   /* Bannière réduite de moitié */
   header.banner img {
-    height: 80px;   /* au lieu de 160px */
+    height: 60px;   /* au lieu de 160px */
   }
 
   nav {
-    top: 80px;      /* ajustement car la bannière est plus petite */
+    top: 60px;      /* ajustement car la bannière est plus petite */
   }
 
   body {
@@ -502,8 +502,8 @@ footer {
 
   /* Footer réduit de moitié */
   footer {
-    padding: 9px 10px; /* au lieu de 18px 15px */
-    font-size: 0.8rem; /* texte du footer réduit */
+    padding: 6px 7px; /* au lieu de 18px 15px */
+    font-size: 0.5rem; /* texte du footer réduit */
   }
 
   /* Conteneur des liens → flex + wrap + gap */
