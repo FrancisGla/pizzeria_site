@@ -497,7 +497,7 @@ footer {
   /* Boutons réduits + espacés */
   nav a {
     font-size: 0.9rem;
-    padding: 8px 14px;
+    padding: 4px 7px;
     margin: 0;   /* 🔹 on laisse gap gérer l’espacement */
   }
 
