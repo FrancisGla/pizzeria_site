@@ -522,7 +522,7 @@ footer {
   /* Correction champs du formulaire */
   .contact-card input,
   .contact-card textarea {
-    width: 100% !important;   /* occupe toute la largeur dispo */
+    width: 60% !important;   /* occupe toute la largeur dispo */
     box-sizing: border-box;   /* évite le débordement */
   }
 
@@ -541,8 +541,8 @@ footer {
 
   /* Boutons réduits + espacés */
   nav a {
-    font-size: 0.8rem;
-    padding: 3px 5px;
+    font-size: 0.9rem;
+    padding: 4px 7px;
     margin: 0;   /* on laisse gap gérer l’espacement */
   }
 
