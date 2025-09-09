@@ -224,3 +224,14 @@ window.onload = function () {
   const form = document.querySelector("form");
   if (form) form.reset();
 };
+// === Zoom toggle sur les images ===
+document.addEventListener("DOMContentLoaded", () => {
+  const zoomables = document.querySelectorAll(".featured-dish img, .card img, .gallery img");
+
+  zoomables.forEach(img => {
+    img.addEventListener("click", () => {
+      img.classList.toggle("zoomed"); // toggle = ajoute ou enlève la classe
+    });
+  });
+});
+
