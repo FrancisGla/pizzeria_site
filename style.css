@@ -505,7 +505,7 @@ footer {
   .featured-dish img,
   .card img,
   .gallery img {
-    max-width: 100%;  /* 🔹 pas de réduction forcée */
+    max-width: 70%;  /* 🔹 pas de réduction forcée */
   }
 }
 
