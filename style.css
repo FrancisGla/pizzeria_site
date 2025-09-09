@@ -486,11 +486,19 @@ footer {
   h3 { font-size: 0.9rem; }
   p, .site-text { font-size: 0.8rem; }
 
+  /* Conteneur des liens → flex + wrap + gap */
+  .menu-links {
+    display: flex;
+    flex-wrap: wrap;          /* permet le retour à la ligne */
+    justify-content: center;  /* centre les boutons */
+    gap: 12px 18px;           /* 🔹 espace horizontal et vertical */
+  }
+
   /* Boutons réduits + espacés */
   nav a {
     font-size: 0.9rem;
     padding: 8px 14px;
-    margin: 6px;   /* 🔹 plus d’espace entre boutons */
+    margin: 0;   /* 🔹 on laisse gap gérer l’espacement */
   }
 
   /* Images gardent le zoom */
@@ -500,3 +508,4 @@ footer {
     max-width: 100%;  /* 🔹 pas de réduction forcée */
   }
 }
+
