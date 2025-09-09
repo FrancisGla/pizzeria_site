@@ -52,7 +52,7 @@ nav a {
   font-size: 1.2em;
   font-weight: bold;
   padding: 12px 26px;
-  margin: 0 8px;
+  margin: 0 10px;
   text-decoration: none;
   background: #d4af37;
   border-radius: 8px;
@@ -486,23 +486,17 @@ footer {
   h3 { font-size: 0.9rem; }
   p, .site-text { font-size: 0.8rem; }
 
-  /* Boutons réduits */
-  .btn-primary {
-    font-size: 0.8rem;
-    padding: 6px 12px;
-  }
-
-  /* Images réduites */
-  .featured-dish img,
-  .card img,
-  .gallery img {
-    max-width: 50%;
-  }
-
-  /* Espacement nav adapté */
+  /* Boutons réduits + espacés */
   nav a {
     font-size: 0.9rem;
     padding: 8px 14px;
-    margin: 4px;
+    margin: 6px;   /* 🔹 plus d’espace entre boutons */
+  }
+
+  /* Images gardent le zoom */
+  .featured-dish img,
+  .card img,
+  .gallery img {
+    max-width: 100%;  /* 🔹 pas de réduction forcée */
   }
 }
