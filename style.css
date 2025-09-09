@@ -488,7 +488,7 @@ footer {
   /* Bannière réduite en largeur et hauteur */
   header.banner img {
     height: 80px;     /* moitié hauteur */
-    width: 50%;       /* moitié largeur */
+    width: 75%;       /* moitié largeur */
     margin: 0 auto;   /* centrer l’image réduite */
     display: block;
   }
@@ -506,7 +506,7 @@ footer {
   footer {
     padding: 9px 10px;   /* moitié padding */
     font-size: 0.8rem;   /* texte réduit */
-    width: 50%;          /* largeur réduite */
+    width: 75%;          /* largeur réduite */
     margin: 0 auto;      /* centré */
     border-radius: 8px;  /* arrondi pour ressembler à un bloc */
   }
