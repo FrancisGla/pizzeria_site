@@ -519,6 +519,13 @@ footer {
     margin: 0 auto;      
   }
 
+  /* ✅ Force Prénom et Nom à passer en colonne */
+  .contact-row {
+    flex-direction: column;
+    align-items: center;   /* centre les champs */
+    gap: 12px;             /* espace entre eux */
+  }
+
   /* Organisation du formulaire en colonne */
   .contact-form {
     display: flex;
