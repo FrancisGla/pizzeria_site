@@ -493,12 +493,13 @@ footer {
     display: block;
   }
 
+  /* ✅ Menu colle à la bannière réduite */
   nav {
-    top: 80px;      
+    top: 70px;      
   }
 
   body {
-    padding-top: 120px;  
+    padding-top: 110px;  /* ajuste le décalage global */
     padding-bottom: 50px; 
   }
 
@@ -566,20 +567,20 @@ footer {
     margin: 0;   
   }
 
-/* Style normal */
-.featured-dish img,
-.card img,
-.gallery img {
-  max-width: 60%;
-  transition: transform 0.5s ease;
-  cursor: pointer; /* pour montrer que c’est cliquable */
-}
+  /* ✅ Images cliquables en mobile */
+  .featured-dish img,
+  .card img,
+  .gallery img {
+    max-width: 60%;
+    transition: transform 0.5s ease;
+    cursor: pointer; /* indique qu’on peut cliquer */
+  }
 
-/* Style zoomé */
-img.zoomed {
-  transform: scale(2.2) rotate(2deg);
-  z-index: 9999;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-  border-color: #d4af37;
-}
+  /* ✅ Zoom toggle via JS */
+  img.zoomed {
+    transform: scale(2.2) rotate(2deg);
+    z-index: 9999;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    border-color: #d4af37;
+  }
 }
