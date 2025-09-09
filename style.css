@@ -486,6 +486,26 @@ footer {
   h3 { font-size: 0.9rem; }
   p, .site-text { font-size: 0.8rem; }
 
+  /* Bannière réduite de moitié */
+  header.banner img {
+    height: 80px;   /* au lieu de 160px */
+  }
+
+  nav {
+    top: 80px;      /* ajustement car la bannière est plus petite */
+  }
+
+  body {
+    padding-top: 120px; /* compense bannière + menu réduits */
+    padding-bottom: 50px; /* compense footer réduit */
+  }
+
+  /* Footer réduit de moitié */
+  footer {
+    padding: 9px 10px; /* au lieu de 18px 15px */
+    font-size: 0.8rem; /* texte du footer réduit */
+  }
+
   /* Conteneur des liens → flex + wrap + gap */
   .menu-links {
     display: flex;
@@ -505,7 +525,6 @@ footer {
   .featured-dish img,
   .card img,
   .gallery img {
-    max-width: 60%;  /* 🔹 pas de réduction forcée */
+    max-width: 60%;  /* 🔹 réduites mais toujours zoomables */
   }
 }
-
