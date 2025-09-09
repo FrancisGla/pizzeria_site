@@ -512,19 +512,22 @@ footer {
   }
 
   /* Bloc contact réduit */
-  .contact-card {
-    max-width: 50%;      /* largeur réduite à moitié */
-    padding: 20px 15px;  /* réduit l’espace interne */
-    font-size: 0.9rem;   /* texte ajusté */
-    margin: 0 auto;      /* centré */
-  }
+.contact-card {
+  max-width: 75%;      /* largeur réduite */
+  padding: 10px 8px;   /* 🔹 espace interne encore plus petit */
+  font-size: 0.85rem;  /* texte légèrement réduit */
+  margin: 0 auto;      /* centré */
+}
 
-  /* Correction champs du formulaire */
-  .contact-card input,
-  .contact-card textarea {
-    width: 60% !important;   /* occupe toute la largeur dispo */
-    box-sizing: border-box;   /* évite le débordement */
-  }
+/* Champs dans le formulaire */
+.contact-card input,
+.contact-card textarea {
+  width: 75%;          /* 🔹 réduit la largeur des champs */
+  padding: 8px 10px;   /* 🔹 réduit la hauteur interne des champs */
+  font-size: 0.85rem;  /* texte un peu plus petit */
+  box-sizing: border-box; /* évite le débordement */
+}
+
 
   .field.email-field,
   .field.message-field textarea {
