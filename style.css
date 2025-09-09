@@ -508,7 +508,7 @@ footer {
     font-size: 0.8rem;   /* texte réduit */
     width: 50%;          /* largeur réduite */
     margin: 0 auto;      /* centré */
-    border-radius: 8px;  /* arrondi pour qu’il ressemble à un bloc */
+    border-radius: 8px;  /* arrondi pour ressembler à un bloc */
   }
 
   /* Bloc contact réduit */
@@ -517,6 +517,18 @@ footer {
     padding: 20px 15px;  /* réduit l’espace interne */
     font-size: 0.9rem;   /* texte ajusté */
     margin: 0 auto;      /* centré */
+  }
+
+  /* Correction champs du formulaire */
+  .contact-card input,
+  .contact-card textarea {
+    width: 100% !important;   /* occupe toute la largeur dispo */
+    box-sizing: border-box;   /* évite le débordement */
+  }
+
+  .field.email-field,
+  .field.message-field textarea {
+    width: 100% !important;   /* supprime les overrides (104%, 97%) */
   }
 
   /* Conteneur des liens → flex + wrap + gap */
@@ -529,8 +541,8 @@ footer {
 
   /* Boutons réduits + espacés */
   nav a {
-    font-size: 0.9rem;
-    padding: 4px 7px;
+    font-size: 0.8rem;
+    padding: 3px 5px;
     margin: 0;   /* on laisse gap gérer l’espacement */
   }
 
