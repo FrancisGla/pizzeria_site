@@ -478,7 +478,7 @@ footer {
   margin-top: 8px;
 }
 /* ===== Responsive ===== */
-@media (max-width: 720px) {
+@media (max-width: 850px) {
   /* Texte réduit */
   h1 { font-size: 1.2rem; }
   h2 { font-size: 1rem; }
