@@ -17,6 +17,7 @@
 
   --texte-principal: #F7F7F7;
   --texte-secondaire: #ccc;
+  --fond: url("images/fond.jpg");
 }
 
 /* ===== Reset global ===== */
@@ -25,8 +26,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, var(--gris-fond), var(--gris-fond2)),
-              url('https://www.transparenttextures.com/patterns/marble.png') repeat;
+  background: var(--fond) no-repeat center center fixed;
   color: var(--gris-clair);
   padding-top: 200px;  /* Compense la bannière fixe + menu */
   padding-bottom: 100px; /* Compense le footer fixe */
@@ -139,7 +139,7 @@ h1, h2 { margin-top: 40px; }
 
 /* ===== Menu spécial ===== */
 .menu-section {
-  background: var(--noir);
+  background: transparent;
   color: var(--or);
   padding: 40px 20px;
   border-radius: 15px;
