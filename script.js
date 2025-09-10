@@ -224,14 +224,40 @@ window.onload = function () {
   const form = document.querySelector("form");
   if (form) form.reset();
 };
-// === Zoom toggle sur les images ===
+// ================== Zoom toggle robuste ==================
 document.addEventListener("DOMContentLoaded", () => {
   const zoomables = document.querySelectorAll(".featured-dish img, .card img, .gallery img");
+  let activeImg = null;
+
+  function closeZoom() {
+    if (activeImg) {
+      activeImg.classList.remove("zoomed");
+      activeImg = null;
+      document.body.style.overflow = ""; // réactive le scroll
+    }
+  }
 
   zoomables.forEach(img => {
-    img.addEventListener("click", () => {
-      img.classList.toggle("zoomed"); // toggle = ajoute ou enlève la classe
+    img.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (activeImg === img) {
+        closeZoom();
+      } else {
+        closeZoom();
+        img.classList.add("zoomed");
+        activeImg = img;
+        document.body.style.overflow = "hidden"; // bloque le scroll
+      }
     });
   });
+
+  // clic ailleurs que sur l’image → ferme
+  document.addEventListener("click", () => closeZoom());
+
+  // touche Échap → ferme
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeZoom();
+  });
 });
+
 

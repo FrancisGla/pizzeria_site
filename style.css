@@ -523,19 +523,19 @@ footer {
   /* ✅ Force Prénom et Nom à passer en colonne */
   .contact-row {
     flex-direction: column;
-    align-items: center;   /* centre les champs */
-    gap: 12px;             /* espace entre eux */
+    align-items: center;  
+    gap: 12px;
   }
 
   /* Organisation du formulaire en colonne */
   .contact-form {
     display: flex;
-    flex-direction: column; /* empile les champs */
-    align-items: center;    /* centre horizontalement */
-    gap: 12px;              /* espace entre chaque champ */
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
   }
 
-  /* Champs dans le formulaire */
+  /* Champs du formulaire */
   .contact-card input,
   .contact-card textarea {
     width: 90%;        
@@ -546,7 +546,7 @@ footer {
     box-sizing: border-box;
   }
 
-  /* Forcer Email et Message à s’aligner avec les autres */
+  /* Email et Message comme les autres */
   .field.email-field,
   .field.message-field textarea {
     width: 90% !important; 
@@ -564,23 +564,31 @@ footer {
   nav a {
     font-size: 0.7rem;
     padding: 4px 7px;
-    margin: 0;   
+    margin: 0;
   }
 
-  /* ✅ Images cliquables en mobile */
+  /* ✅ Images cliquables (mobile) */
   .featured-dish img,
   .card img,
   .gallery img {
     max-width: 60%;
-    transition: transform 0.5s ease;
-    cursor: pointer; /* indique qu’on peut cliquer */
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
   }
 
-  /* ✅ Zoom toggle via JS */
+  /* ✅ Image zoomée (fixée, centrée, au-dessus du site) */
   img.zoomed {
-    transform: scale(2.2) rotate(2deg);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.9);
+    max-width: 90vw;
+    max-height: 90vh;
     z-index: 9999;
+    cursor: zoom-out;
     box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-    border-color: #d4af37;
+    border: 2px solid #d4af37;
+    border-radius: 6px;
   }
 }
+
