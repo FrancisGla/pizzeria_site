@@ -457,7 +457,8 @@ footer {
   /* Menu collé à la bannière */
   nav { top: 70px; }
 
-  body { padding-top: 110px; padding-bottom: 50px; }
+  body { background: var(--gris-clair)
+    padding-top: 110px; padding-bottom: 50px; }
 
   /* Footer réduit */
   footer {
