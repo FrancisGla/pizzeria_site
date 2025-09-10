@@ -103,7 +103,7 @@ nav a:hover {
   background: none;
   border: none;
   color: var(--blanc);
-  padding: 6px 6px;
+  padding: 6px 4px;
 }
 
 /* support pour menu responsive (toggle class .show) */
