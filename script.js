@@ -1,15 +1,23 @@
 // ================== Variables couleurs ==================
 const rootStyles = getComputedStyle(document.documentElement);
-const rougeTomate  = (rootStyles.getPropertyValue("--rouge-tomate")  || "#D32F2F").trim();
-const vertBasilic  = (rootStyles.getPropertyValue("--vert-basilic")  || "#388E3C").trim();
-const beigeSable   = (rootStyles.getPropertyValue("--beige-sable")   || "#F5F0E6").trim();
-const bleuOcean    = (rootStyles.getPropertyValue("--bleu-ocean")    || "#0277BD").trim();
-const noirArdoise  = (rootStyles.getPropertyValue("--noir-ardoise") || "#333333").trim();
-const blanc        = (rootStyles.getPropertyValue("--blanc")        || "#ffffff").trim();
-const grisClair    = (rootStyles.getPropertyValue("--gris-clair")   || "#f9f9f9").trim();
-const grisFonce    = (rootStyles.getPropertyValue("--gris-fonce")   || "#555555").trim();
-const accentColor  = (rootStyles.getPropertyValue("--accent-color") || "#d4af37").trim();
-const disabledBg   = (rootStyles.getPropertyValue("--disabled-bg")  || "#e0e0e0").trim();
+
+const noir       = (rootStyles.getPropertyValue("--noir")        || "#000").trim();
+const noirFonce  = (rootStyles.getPropertyValue("--noir-fonce")  || "#1a1a1a").trim();
+const grisMoyen  = (rootStyles.getPropertyValue("--gris-moyen")  || "#222").trim();
+const grisClair  = (rootStyles.getPropertyValue("--gris-clair")  || "#eee").trim();
+const grisPlusClair = (rootStyles.getPropertyValue("--gris-plus-clair") || "#f9f9f9").trim();
+const grisBordure   = (rootStyles.getPropertyValue("--gris-bordure")   || "#555").trim();
+const grisCard      = (rootStyles.getPropertyValue("--gris-card")      || "#666").trim();
+
+const blanc     = (rootStyles.getPropertyValue("--blanc")       || "#fff").trim();
+const or        = (rootStyles.getPropertyValue("--or")          || "#d4af37").trim();
+const orFonce   = (rootStyles.getPropertyValue("--or-fonce")    || "#b08a2e").trim();
+const orClair   = (rootStyles.getPropertyValue("--or-clair")    || "#e6c86e").trim();
+
+const textePrincipal   = (rootStyles.getPropertyValue("--texte-principal")   || "#F7F7F7").trim();
+const texteSecondaire  = (rootStyles.getPropertyValue("--texte-secondaire")  || "#ccc").trim();
+
+const disabledBg = "#e0e0e0"; // couleur des champs désactivés
 
 // ================== MENU BURGER ==================
 function toggleMenu() {
@@ -33,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
   captchaLabel.style.fontWeight = "bold";
   captchaLabel.style.marginBottom = "8px";
   captchaLabel.style.fontSize = "1.3rem";
-  captchaLabel.style.color = rougeTomate;
+  captchaLabel.style.color = or; // accent doré pour cohérence
 
   captchaInput.style.width = "600px";
   captchaInput.style.textAlign = "center";
@@ -41,14 +49,14 @@ document.addEventListener("DOMContentLoaded", function () {
   captchaInput.style.margin = "10px auto";
   captchaInput.style.fontSize = "1.3rem";
   captchaInput.style.height = "40px";
-  captchaInput.style.borderColor = grisFonce;
-  captchaInput.style.background = grisClair;
-  captchaInput.style.color = noirArdoise;
+  captchaInput.style.borderColor = grisBordure;
+  captchaInput.style.background = grisPlusClair;
+  captchaInput.style.color = noirFonce;
 
-  if (captchaInfo) captchaInfo.style.color = vertBasilic;
+  if (captchaInfo) captchaInfo.style.color = orClair;
 
   if (retryBtn) {
-    retryBtn.style.background = rougeTomate;
+    retryBtn.style.background = orFonce;
     retryBtn.style.color = blanc;
     retryBtn.style.border = "none";
     retryBtn.style.borderRadius = "6px";
@@ -93,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const seconds = timeLeft % 60;
     const formatted = String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
     const fontSize = Math.max(12, Math.floor(clockCanvas.height * 0.6));
-    ctx.fillStyle = accentColor;
+    ctx.fillStyle = or;
     ctx.font = `bold ${fontSize}px Arial, sans-serif`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -120,11 +128,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (captchaInfo) {
         captchaInfo.innerHTML = `
-          <span style="color:${accentColor}; font-weight:bold; font-size:1.2rem;">
+          <span style="color:${or}; font-weight:bold; font-size:1.2rem;">
             🚫 3 tentatives échouées.
           </span><br>
-          <button id="reloadBtn">🔄 Recharger la page</button>
-          <button id="homeBtn">🏠 Retour à l'accueil</button>
+          <button id="reloadBtn" style="background:${or}; color:${noirFonce};">🔄 Recharger la page</button>
+          <button id="homeBtn" style="background:${or}; color:${noirFonce};">🏠 Retour à l'accueil</button>
         `;
         const reloadBtn = document.getElementById("reloadBtn");
         const homeBtn = document.getElementById("homeBtn");
@@ -183,24 +191,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const imgs = document.querySelectorAll(".featured-dish img, .card img, .gallery img");
 
   imgs.forEach((img, index) => {
-    // Fade-in progressif
     setTimeout(() => img.classList.add("show"), 200 * index);
 
-    // Toggle zoom au clic
     img.addEventListener("click", (e) => {
       e.stopPropagation();
       img.classList.toggle("zoomed");
     });
   });
 
-  // Clic ailleurs = dézoome
   document.addEventListener("click", (e) => {
     if (!e.target.matches(".featured-dish img, .card img, .gallery img")) {
       imgs.forEach(img => img.classList.remove("zoomed"));
     }
   });
 
-  // Échap ferme aussi
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") imgs.forEach(img => img.classList.remove("zoomed"));
   });
