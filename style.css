@@ -573,22 +573,8 @@ footer {
   .gallery img {
     max-width: 60%;
     transition: transform 0.3s ease;
-    cursor: zoom-in;
+    cursor: zoom-in; /* indique qu’on peut cliquer */
   }
 
-  /* ✅ Image zoomée (fixée, centrée, au-dessus du site) */
-  img.zoomed {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1.9);
-    max-width: 90vw;
-    max-height: 90vh;
-    z-index: 9999;
-    cursor: zoom-out;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-    border: 2px solid #d4af37;
-    border-radius: 6px;
-  }
 }
 

@@ -224,40 +224,121 @@ window.onload = function () {
   const form = document.querySelector("form");
   if (form) form.reset();
 };
-// ================== Zoom toggle robuste ==================
-document.addEventListener("DOMContentLoaded", () => {
-  const zoomables = document.querySelectorAll(".featured-dish img, .card img, .gallery img");
-  let activeImg = null;
 
-  function closeZoom() {
-    if (activeImg) {
-      activeImg.classList.remove("zoomed");
-      activeImg = null;
-      document.body.style.overflow = ""; // réactive le scroll
-    }
+// ================== Zoom clone (toggle propre) ==================
+document.addEventListener("DOMContentLoaded", () => {
+  const imgs = document.querySelectorAll(".featured-dish img, .card img, .gallery img");
+  let clone = null;
+  let sourceImg = null;
+  let overlay = document.querySelector('.zoom-overlay');
+
+  // créer l'overlay s'il n'existe pas
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'zoom-overlay';
+    document.body.appendChild(overlay);
   }
 
-  zoomables.forEach(img => {
-    img.addEventListener("click", (e) => {
+  function openZoom(img) {
+    closeZoom(); // fermer si déjà un clone ouvert
+
+    const rect = img.getBoundingClientRect();
+    sourceImg = img;
+    clone = img.cloneNode(true);
+    clone.className = 'zoom-clone';
+
+    // positionner le clone centré sur le centre de l'image d'origine
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+
+    clone.style.left = cx + 'px';
+    clone.style.top = cy + 'px';
+    clone.style.width = rect.width + 'px';
+    clone.style.height = rect.height + 'px';
+    clone.style.transform = 'translate(-50%,-50%) scale(1)';
+
+    document.body.appendChild(clone);
+
+    // calculer échelle pour s'adapter à l'écran (90% viewport)
+    const maxW = window.innerWidth * 0.9;
+    const maxH = window.innerHeight * 0.9;
+    const scaleW = maxW / rect.width;
+    const scaleH = maxH / rect.height;
+    const scale = Math.min(scaleW, scaleH, 2.8); // plafond pour éviter trop gros
+
+    const finalWidth = Math.round(rect.width * scale);
+    const finalHeight = Math.round(rect.height * scale);
+
+    // forcer reflow avant animation
+    clone.getBoundingClientRect();
+
+    // afficher overlay + bloquer scroll
+    overlay.classList.add('show');
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+
+    // animer vers le centre et la taille finale
+    requestAnimationFrame(() => {
+      clone.style.left = '50%';
+      clone.style.top = '50%';
+      clone.style.width = finalWidth + 'px';
+      clone.style.height = finalHeight + 'px';
+      // on garde transform translate(-50%,-50%) (déjà appliqué)
+    });
+
+    // clic sur le clone le ferme
+    clone.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (activeImg === img) {
+      closeZoom();
+    });
+  }
+
+  function closeZoom() {
+    if (!clone || !sourceImg) return;
+
+    // revenir à la position/size d'origine avant suppression
+    const rect = sourceImg.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+
+    overlay.classList.remove('show');
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+
+    clone.style.left = cx + 'px';
+    clone.style.top = cy + 'px';
+    clone.style.width = rect.width + 'px';
+    clone.style.height = rect.height + 'px';
+
+    // supprimer le clone après la fin de la transition
+    clone.addEventListener('transitionend', function cleanup() {
+      if (clone && clone.parentNode) clone.parentNode.removeChild(clone);
+      clone = null;
+      sourceImg = null;
+      this.removeEventListener('transitionend', cleanup);
+    }, { once: true });
+  }
+
+  // attacher handlers
+  imgs.forEach(img => {
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // si le clone déjà ouvert pour cette image => fermer
+      if (clone && sourceImg === img) {
         closeZoom();
       } else {
-        closeZoom();
-        img.classList.add("zoomed");
-        activeImg = img;
-        document.body.style.overflow = "hidden"; // bloque le scroll
+        openZoom(img);
       }
     });
   });
 
-  // clic ailleurs que sur l’image → ferme
-  document.addEventListener("click", () => closeZoom());
+  // clic hors image ferme
+  overlay.addEventListener('click', closeZoom);
+  document.addEventListener('click', () => { if (clone) closeZoom(); });
 
-  // touche Échap → ferme
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeZoom();
-  });
+  // Échap ferme aussi
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeZoom(); });
+
+  // si rotation/redim, on ferme pour éviter incohérences
+  window.addEventListener('resize', () => { if (clone) closeZoom(); });
 });
-
-
