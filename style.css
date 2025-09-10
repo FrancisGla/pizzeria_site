@@ -359,7 +359,7 @@ footer {
 .contact-row {
   display: flex;
   justify-content: space-between;
-  gap: 60px;
+  gap: 20px;
 }
 
 .contact-row .field {
