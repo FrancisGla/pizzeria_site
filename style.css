@@ -440,7 +440,7 @@ footer {
 #captchaInfo { font-size:1.2rem; font-weight:900; color:var(--noir); margin-top:8px; }
 
 /* ===== Responsive ===== */
-@media (max-width: 950px) {
+@media (max-width: 1050px) {
   h1 { font-size: 1.2rem; }
   h2 { font-size: 1rem; }
   h3 { font-size: 0.9rem; }
