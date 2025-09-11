@@ -500,13 +500,12 @@ footer {
   body { padding-top: 110px; padding-bottom: 50px; }
 
   /* Footer réduit */
-  footer {
-    padding: 6px 10px;
-    font-size: 0.6rem;
-    width: 100%;
-    margin: 0 auto;
-    border-radius: 8px;
+ footer {
+    padding: 12px 15px; /* un peu plus grand */
+    font-size: 0.8rem; /* lisible */
+    border-radius: 0; /* éviter l’effet "boîte" */
   }
+
 
   /* Contact réduit */
   .contact-card {
