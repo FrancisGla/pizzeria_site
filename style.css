@@ -332,7 +332,7 @@ footer {
   left: 0;
   width: 100%;
   text-align: center;
-  padding: 18px 15px;
+  padding: 6px 15px;
   background: var(--noir-fonce);
   color: var(--gris-clair);
   z-index: 1000;
@@ -354,7 +354,7 @@ footer {
 .site-title {
   text-align: center;
   display: block;
-  margin: 0 auto 40px auto;
+  margin: 0 auto 5px auto;
   font-size: 2em;
   font-weight: bold;
   color: var(--or);
@@ -500,7 +500,7 @@ footer {
   body { padding-top: 110px; padding-bottom: 50px; }
 
  footer {
-    padding: 6px 10px;
+    padding: 2px 10px;
     font-size: 0.6rem;
     width: 100%;
     margin: 0 auto;
@@ -562,18 +562,4 @@ footer {
     cursor: zoom-in;
   }
 }
-/* ===== Footer collé en bas si peu de contenu ===== */
-html, body {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
 
-main {
-  flex: 1; /* pousse le footer en bas */
-}
-
-footer {
-  margin-top: auto;
-}
