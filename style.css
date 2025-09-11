@@ -48,6 +48,18 @@ header.banner {
   z-index: 1000;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap; /* évite que le texte occupe de l’espace */
+  border: 0;
+}
+
 header.banner img {
   width: 100%;
   height: 160px;
@@ -118,6 +130,29 @@ nav a:hover {
   /* no-op: visible by default; used by JS to toggle display on narrow screens */
 }
 
+.map-section {
+  max-width: 1000px;        /* limite la largeur pour éviter que ça s’étale trop */
+  margin: 40px auto;       /* centre la section avec un espace vertical */
+  padding: 20px;           /* ajoute de l’air autour du contenu */
+  text-align: center;      /* centre le texte (utile pour le titre et l’adresse) */
+}
+
+.map-section h2 {
+  color: var(--or);        /* reprend ta couleur or */
+  margin-bottom: 15px;     /* espace sous le titre */
+}
+
+.map-section p {
+  margin-bottom: 20px;     /* espace sous l’adresse */
+  font-size: 1.1rem;       /* un peu plus grand pour la lisibilité */
+}
+
+.map-section iframe {
+  border-radius: 12px;     /* coins arrondis de la carte */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25); /* petite ombre pour le relief */
+}
+
+
 /* ===== Sections ===== */
 section {
   max-width: 1000px;
@@ -150,6 +185,11 @@ h1, h2 { margin-top: 40px; }
 .menu-section h3 { color: var(--or); }
 
 .menu-section p { color: var(--or-clair); }
+
+/* 👉 ajout d’une classe spéciale */
+.menu-section p.highlight {
+  color: var(--or);
+}
 
 .menu-section .card {
   background: var(--gris-moyen);
