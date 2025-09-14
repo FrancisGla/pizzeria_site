@@ -517,7 +517,7 @@ footer {
   h3 { font-size: 0.9rem; }
   p, .site-text { font-size: 0.8rem; }
   .site-title {
-    margin-bottom: 25px; /* plus d'espace que sur desktop */
+    margin-bottom: 35px; /* plus d'espace que sur desktop */
   }
   /* Bannière réduite */
   header.banner img {
