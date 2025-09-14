@@ -108,6 +108,17 @@ nav a:hover {
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
+/* Style pour le lien sans couleur bleue ni soulignement */
+.no-link-style {
+  color: var(--or-fonce);      /* prend la couleur du texte parent */
+  text-decoration: none; /* supprime le soulignement */
+}
+
+.no-link-style:hover {
+  text-decoration: underline; /* optionnel : ajoute un effet au survol */
+  color: #d2691e; /* par exemple une couleur personnalisée */
+}
+
 /* menu-toggle (burger) */
 .menu-toggle {
   display: none;
@@ -345,6 +356,26 @@ footer {
              footerBreath 6s ease-in-out infinite;
   animation-delay: 0.3s, 1.5s, 1.5s;
 }
+
+.footer-links {
+  margin-top: 10px;
+}
+
+.footer-links a:first-child {
+  margin-right: 10px; /* espace entre les deux liens */
+}
+
+.footer-links a {
+  color: #ccc;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
 
 @keyframes footerFadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes footerPulse { 0%,100% { color: var(--gris-clair); text-shadow: 0 0 4px rgba(212,175,55,0.2);} 50% { color: var(--or); text-shadow: 0 0 14px rgba(212,175,55,0.85); } }

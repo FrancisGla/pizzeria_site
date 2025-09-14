@@ -384,10 +384,3 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener('resize', () => { if (clone) closeZoom(true); });
 
 });
-footer.hidden {
-  opacity: 0;
-  transform: translateY(100%);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  pointer-events: none;
-}
-
