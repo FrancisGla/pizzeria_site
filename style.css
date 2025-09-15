@@ -143,8 +143,8 @@ nav a:hover {
 
 .map-section {
   max-width: 1000px;        /* limite la largeur pour éviter que ça s’étale trop */
-  margin: 40px auto;       /* centre la section avec un espace vertical */
-  padding: 20px;           /* ajoute de l’air autour du contenu */
+  margin: 4px auto;       /* centre la section avec un espace vertical */
+  padding: 1px;           /* ajoute de l’air autour du contenu */
   text-align: center;      /* centre le texte (utile pour le titre et l’adresse) */
 }
 
@@ -180,6 +180,11 @@ section h2 {
   text-align: center;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
+.welcome-section { 
+  text-align: center;
+  padding: 1px 15px;
+  color: var(--or);
+}
 
 h1, h2 { margin-top: 40px; }
 
@@ -187,7 +192,7 @@ h1, h2 { margin-top: 40px; }
 .menu-section {
   background: var(--noir);
   color: var(--or);
-  padding: 40px 20px;
+  padding: 1px 20px;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.6);
 }
@@ -516,9 +521,11 @@ footer {
   h2 { font-size: 1rem; }
   h3 { font-size: 0.9rem; }
   p, .site-text { font-size: 0.8rem; }
+
   .site-title {
     margin-bottom: 35px; /* plus d'espace que sur desktop */
   }
+  
   /* Bannière réduite */
   header.banner img {
     height: 70px;
