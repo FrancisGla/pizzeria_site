@@ -558,7 +558,7 @@ footer {
   nav { top: 70px; }
 
  body {
-    padding-top: 200px;   /* OK pour compenser la bannière + menu réduits */
+    padding-top: 100px;   /* OK pour compenser la bannière + menu réduits */
     padding-bottom: 0 !important;  /* ⚡ supprime l'espace inutile */
   }
   footer { 
@@ -623,16 +623,4 @@ footer {
     transition: transform 0.3s ease;
     cursor: zoom-in;
   }
-}
-
-/* Nouveau conteneur pour gérer le footer */
-.page-wrapper {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Main prend l’espace restant */
-main {
-  flex: 1;
 }
