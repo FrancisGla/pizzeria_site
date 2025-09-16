@@ -1,4 +1,4 @@
-// ================== Variables couleurs (lu depuis :root si besoin) ==================
+// ================== Variables couleurs ==================
 const rootStyles = getComputedStyle(document.documentElement);
 
 const noir       = (rootStyles.getPropertyValue("--noir")        || "#000").trim();
@@ -26,7 +26,6 @@ function toggleMenu() {
   links.classList.toggle('show');
 }
 
-// fermer le menu quand on clique hors menu (en mode mobile)
 document.addEventListener('click', (e) => {
   const links = document.querySelector('.menu-links');
   const toggle = document.querySelector('.menu-toggle');
@@ -36,7 +35,7 @@ document.addEventListener('click', (e) => {
   links.classList.remove('show');
 });
 
-// ================== ANIMATION FADE-IN des images ==================
+// ================== FADE-IN IMAGES ==================
 document.addEventListener("DOMContentLoaded", () => {
   const imgs = document.querySelectorAll(".gallery img, .card img, .featured-dish img");
   imgs.forEach((img, index) => {
@@ -56,15 +55,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!captchaLabel || !captchaInput || !retryBtn || !form) return;
 
-  // styles dynamiques (toujours issus du CSS via variables)
   captchaLabel.style.display = "block";
   captchaLabel.style.textAlign = "center";
   captchaLabel.style.fontWeight = "bold";
   captchaLabel.style.marginBottom = "8px";
   captchaLabel.style.fontSize = "1.3rem";
-  captchaLabel.style.color = or; // accent doré
+  captchaLabel.style.color = or;
 
-  // champs
   captchaInput.style.width = "600px";
   captchaInput.style.textAlign = "center";
   captchaInput.style.display = "block";
@@ -86,7 +83,6 @@ document.addEventListener("DOMContentLoaded", function () {
     retryBtn.style.cursor = "pointer";
   }
 
-  // logique captcha
   let solution = 0;
   let tries = 0;
   let timer = null;
@@ -135,9 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
     tries++;
     captchaInput.value = "";
     if (captchaInfo) {
-      captchaInfo.innerHTML = `<span class="error-message">
-        ${message} Tentatives : ${tries}/3
-      </span>`;
+      captchaInfo.innerHTML = `<span class="error-message">${message} Tentatives : ${tries}/3</span>`;
     }
     retryBtn.style.display = "inline-block";
 
@@ -222,7 +216,6 @@ window.onload = function () {
 document.addEventListener("DOMContentLoaded", () => {
   const imgs = Array.from(document.querySelectorAll(".featured-dish img, .card img, .gallery img"));
 
-  // create overlay once
   let overlay = document.querySelector('.zoom-overlay');
   if (!overlay) {
     overlay = document.createElement('div');
@@ -231,156 +224,62 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   let clone = null;
-  let sourceImg = null;
   let cleanupTimer = null;
 
   function removeCloneImmediate() {
     if (cleanupTimer) { clearTimeout(cleanupTimer); cleanupTimer = null; }
-    if (clone && clone.parentNode) {
-      clone.parentNode.removeChild(clone);
-    }
+    if (clone && clone.parentNode) clone.parentNode.removeChild(clone);
     clone = null;
-    sourceImg = null;
     overlay.classList.remove('show');
-    document.documentElement.style.overflow = '';
-    document.body.style.overflow = '';
   }
 
   function openZoom(img) {
-    // if a clone already exists, remove it immediately (no animation)
     if (clone) removeCloneImmediate();
 
-    const rect = img.getBoundingClientRect();
-    sourceImg = img;
     clone = img.cloneNode(true);
     clone.className = 'zoom-clone';
-
-    // set initial position & size to match source image center
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-
-    clone.style.left = cx + 'px';
-    clone.style.top = cy + 'px';
-    clone.style.width = rect.width + 'px';
-    clone.style.height = rect.height + 'px';
-    clone.style.transform = 'translate(-50%,-50%)';
-    clone.style.transition = 'left 300ms ease, top 300ms ease, width 300ms ease, height 300ms ease';
+    clone.style.position = 'fixed';
+    clone.style.left = '50%';
+    clone.style.top = '50%';
+    clone.style.transform = 'translate(-50%, -50%)';
+    clone.style.width = img.width + 'px';
+    clone.style.height = img.height + 'px';
+    clone.style.transition = 'all 300ms ease';
 
     document.body.appendChild(clone);
+    overlay.classList.add('show');
 
-    // compute scale to fit viewport (90% area) but cap at 3x
     const maxW = window.innerWidth * 0.9;
     const maxH = window.innerHeight * 0.9;
-    const scaleW = maxW / rect.width;
-    const scaleH = maxH / rect.height;
-    const scale = Math.min(scaleW, scaleH, 2.8);
-
-    const finalWidth = Math.round(rect.width * scale);
-    const finalHeight = Math.round(rect.height * scale);
-
-    // force reflow then animate to center + final size
-    clone.getBoundingClientRect();
-
-    overlay.classList.add('show');
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
+    const scale = Math.min(maxW / img.width, maxH / img.height, 2.8);
 
     requestAnimationFrame(() => {
-      clone.style.left = '50%';
-      clone.style.top = '50%';
-      clone.style.width = finalWidth + 'px';
-      clone.style.height = finalHeight + 'px';
+      clone.style.width = img.width * scale + 'px';
+      clone.style.height = img.height * scale + 'px';
     });
 
-    // click on the clone closes it
-    const onCloneClick = (ev) => {
-      ev.stopPropagation();
-      closeZoom();
-    };
-    clone.addEventListener('click', onCloneClick);
+    clone.addEventListener('click', (ev) => { ev.stopPropagation(); closeZoom(); });
 
-    // safety fallback if transitionend not fired
-    cleanupTimer = setTimeout(() => {
-      // keep clone (no-op) — but ensure no duplication later
-      cleanupTimer = null;
-    }, 800);
+    cleanupTimer = setTimeout(() => { cleanupTimer = null; }, 800);
   }
 
-  function closeZoom(forceImmediate = false) {
-    if (!clone || !sourceImg) return;
-
+  function closeZoom() {
+    if (!clone) return;
+    clone.remove();
+    clone = null;
     overlay.classList.remove('show');
-    document.documentElement.style.overflow = '';
-    document.body.style.overflow = '';
-
-    const rect = sourceImg.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-
-    // animate back to original position/size
-    clone.style.left = cx + 'px';
-    clone.style.top = cy + 'px';
-    clone.style.width = rect.width + 'px';
-    clone.style.height = rect.height + 'px';
-
-    // cleanup after transition
-    const cleanupFn = function () {
-      if (clone && clone.parentNode) clone.parentNode.removeChild(clone);
-      clone = null;
-      sourceImg = null;
-      if (cleanupTimer) { clearTimeout(cleanupTimer); cleanupTimer = null; }
-      clone && clone.removeEventListener && clone.removeEventListener('click', cleanupFn);
-    };
-
-    // in some environments transitionend may not fire reliably — use both
-    let handled = false;
-    const onTransitionEnd = (e) => {
-      if (handled) return;
-      handled = true;
-      if (clone && clone.parentNode) clone.parentNode.removeChild(clone);
-      clone = null;
-      sourceImg = null;
-      if (cleanupTimer) { clearTimeout(cleanupTimer); cleanupTimer = null; }
-    };
-
-    clone.addEventListener('transitionend', onTransitionEnd, { once: true });
-
-    // fallback remove if transitionend doesn't fire
-    cleanupTimer = setTimeout(() => {
-      if (!handled) {
-        handled = true;
-        removeCloneImmediate();
-      }
-    }, 500);
   }
 
-  // attach handlers to images
   imgs.forEach(img => {
     img.addEventListener('click', (e) => {
       e.stopPropagation();
-      // if same image is zoomed, close
-      if (clone && sourceImg === img) {
-        closeZoom();
-      } else {
-        openZoom(img);
-      }
+      openZoom(img);
     });
   });
 
-  // click outside clone closes
-  overlay.addEventListener('click', () => { if (clone) closeZoom(); });
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.zoom-clone')) {
-      if (clone) closeZoom();
-    }
-  });
-
-  // escape key closes
+  overlay.addEventListener('click', closeZoom);
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && clone) closeZoom();
   });
-
-  // on resize/orientation change close to avoid misplacement
-  window.addEventListener('resize', () => { if (clone) closeZoom(true); });
-
+  window.addEventListener('resize', () => { if (clone) closeZoom(); });
 });

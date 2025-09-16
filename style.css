@@ -28,11 +28,10 @@ body {
   background: linear-gradient(to bottom, var(--gris-fond), var(--gris-fond2)),
               url('https://www.transparenttextures.com/patterns/marble.png') repeat;
   color: var(--gris-clair);
-  padding-top: 200px;  /* Compense la bannière fixe + menu */
-  padding-bottom: 100px; /* Compense le footer fixe */
+  padding-top: 200px;
+  padding-bottom: 100px;
 }
 
-/* Réserve un espace en bas pour le footer fixe */
 body::after {
   content: "";
   display: block;
@@ -56,7 +55,7 @@ header.banner {
   margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
-  white-space: nowrap; /* évite que le texte occupe de l’espace */
+  white-space: nowrap;
   border: 0;
 }
 
@@ -108,18 +107,16 @@ nav a:hover {
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-/* Style pour le lien sans couleur bleue ni soulignement */
 .no-link-style {
-  color: var(--or-fonce);      /* prend la couleur du texte parent */
-  text-decoration: none; /* supprime le soulignement */
+  color: var(--or-fonce);
+  text-decoration: none;
 }
 
 .no-link-style:hover {
-  text-decoration: underline; /* optionnel : ajoute un effet au survol */
-  color: #d2691e; /* par exemple une couleur personnalisée */
+  text-decoration: underline;
+  color: #d2691e;
 }
 
-/* menu-toggle (burger) */
 .menu-toggle {
   display: none;
   font-size: 24px;
@@ -129,40 +126,35 @@ nav a:hover {
   padding: 6px 4px;
 }
 
-/* support pour menu responsive (toggle class .show) */
 .menu-links {
   display: flex;
   gap: 12px;
   align-items: center;
 }
 
-/* si on utilise le menu mobile : .menu-links.show peut rester identique (on gère via CSS responsive) */
-.menu-links.show {
-  /* no-op: visible by default; used by JS to toggle display on narrow screens */
-}
+.menu-links.show {}
 
 .map-section {
-  max-width: 1000px;        /* limite la largeur pour éviter que ça s’étale trop */
-  margin: 4px auto;       /* centre la section avec un espace vertical */
-  padding: 1px;           /* ajoute de l’air autour du contenu */
-  text-align: center;      /* centre le texte (utile pour le titre et l’adresse) */
+  max-width: 1000px;
+  margin: 4px auto;
+  padding: 1px;
+  text-align: center;
 }
 
 .map-section h2 {
-  color: var(--or);        /* reprend ta couleur or */
-  margin-bottom: 15px;     /* espace sous le titre */
+  color: var(--or);
+  margin-bottom: 15px;
 }
 
 .map-section p {
-  margin-bottom: 20px;     /* espace sous l’adresse */
-  font-size: 1.1rem;       /* un peu plus grand pour la lisibilité */
+  margin-bottom: 20px;
+  font-size: 1.1rem;
 }
 
 .map-section iframe {
-  border-radius: 12px;     /* coins arrondis de la carte */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25); /* petite ombre pour le relief */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
-
 
 /* ===== Sections ===== */
 section {
@@ -180,7 +172,8 @@ section h2 {
   text-align: center;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
-.welcome-section { 
+
+.welcome-section {
   text-align: center;
   padding: 1px 15px;
   color: var(--or);
@@ -202,10 +195,7 @@ h1, h2 { margin-top: 40px; }
 
 .menu-section p { color: var(--or-clair); }
 
-/* 👉 ajout d’une classe spéciale */
-.menu-section p.highlight {
-  color: var(--or);
-}
+.menu-section p.highlight { color: var(--or); }
 
 .menu-section .card {
   background: var(--gris-moyen);
@@ -305,65 +295,44 @@ h1, h2 { margin-top: 40px; }
   transform: scale(1) rotate(0);
 }
 
-/* ===== Zoom overlay / clone styles (pour le zoom "propre") ===== */
+/* ===== Zoom overlay / clone ===== */
 .zoom-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.0);
-  z-index: 2000;
+  background: rgba(0,0,0,0.8);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 220ms ease;
-  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
 }
 
 .zoom-overlay.show {
-  background: rgba(0,0,0,0.45);
   opacity: 1;
   visibility: visible;
-  pointer-events: auto;
 }
 
-/* clone : positionné fixed + transition sur left/top/width/height */
+/* ⚡ VERSION CORRIGÉE DE ZOOM-CLONE */
 .zoom-clone {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  z-index: 2001;
-  border-radius: 12px;
-  object-fit: cover;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  border: 3px solid var(--gris-card);
-  transition: left 300ms ease, top 300ms ease, width 300ms ease, height 300ms ease;
+  position: absolute;      /* suit la position verticale de l’image */
+  left: 50%;               /* centré horizontalement */
+  transform: translateX(-50%);
   cursor: zoom-out;
-  will-change: left, top, width, height;
-  max-width: none; /* allow scaling bigger than original */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  border-radius: 12px;
+  object-fit: contain;
+  z-index: 2001;
+  transition: all 300ms ease;
+  max-width: none;
 }
 
 /* ===== Footer ===== */
-/* Utiliser flexbox pour "pousser" le footer en bas */
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 0 !important;
-}
-
+html, body { height: 100%; margin: 0; }
+body { display: flex; flex-direction: column; padding-bottom: 0 !important; }
 body::after { display: none !important; }
-
-main {
-  flex: 1 0 auto;
-  min-height: 0; /* évite les problèmes de débordement dans certains navigateurs */
-}
+main { flex: 1 0 auto; min-height: 0; }
 
 footer {
-  /* position: fixed; */ 
-  position: relative; /* plus fixed */ 
+  position: relative;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -372,8 +341,6 @@ footer {
   background: var(--noir-fonce);
   color: var(--gris-clair);
   z-index: 1000;
-
-  /* Animation apparition + pulsation + respiration */
   opacity: 0;
   transform: translateY(40px);
   animation: footerFadeUp 1s ease-out forwards,
@@ -382,31 +349,15 @@ footer {
   animation-delay: 0.3s, 1.5s, 1.5s;
 }
 
-.footer-links {
-  margin-top: 10px;
-}
-
-.footer-links a:first-child {
-  margin-right: 10px; /* espace entre les deux liens */
-}
-
-.footer-links a {
-  color: #ccc;
-  font-size: 14px;
-  text-decoration: none;
-}
-
-.footer-links a:hover {
-  text-decoration: underline;
-  color: #fff;
-}
-
+.footer-links { margin-top: 10px; }
+.footer-links a:first-child { margin-right: 10px; }
+.footer-links a { color: #ccc; font-size: 14px; text-decoration: none; }
+.footer-links a:hover { text-decoration: underline; color: #fff; }
 
 @keyframes footerFadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes footerPulse { 0%,100% { color: var(--gris-clair); text-shadow: 0 0 4px rgba(212,175,55,0.2);} 50% { color: var(--or); text-shadow: 0 0 14px rgba(212,175,55,0.85); } }
 @keyframes footerBreath { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-5px);} }
 
-/* Correction centrage + espace du titre bas de page */
 .site-title {
   text-align: center;
   display: block;
@@ -447,32 +398,12 @@ footer {
   margin-top: 20px;
 }
 
-.contact-form {
-  display: grid;
-  gap: 24px;
-}
+.contact-form { display: grid; gap: 24px; }
+.contact-row { display: flex; justify-content: space-between; gap: 20px; }
+.contact-row .field { flex: 0 0 60%; max-width: 370px; }
 
-.contact-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.contact-row .field {
-  flex: 0 0 60%;
-  max-width: 370px;
-}
-
-.field label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: var(--or);
-  font-size: 1.05rem;
-}
-
-.field input,
-.field textarea {
+.field label { display: block; font-weight: bold; margin-bottom: 8px; color: var(--or); font-size: 1.05rem; }
+.field input, .field textarea {
   width: 93%;
   padding: 14px 16px;
   border: 1px solid var(--gris-bordure);
@@ -482,21 +413,13 @@ footer {
   background: var(--gris-plus-clair);
   box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
 }
-
-.field input:focus,
-.field textarea:focus {
+.field input:focus, .field textarea:focus {
   outline: none;
   border-color: var(--or);
   box-shadow: 0 0 8px rgba(212,175,55,0.7);
 }
-
 .field.email-field { width: 104%; }
-
-.field.message-field textarea {
-  width: 97%;
-  height: 270px;
-  resize: vertical;
-}
+.field.message-field textarea { width: 97%; height: 270px; resize: vertical; }
 
 /* Boutons */
 .btn-primary {
@@ -512,7 +435,6 @@ footer {
   transition: all 0.3s ease;
   display: inline-block;
 }
-
 .btn-primary:hover {
   background: var(--or-fonce);
   color: var(--blanc);
@@ -542,85 +464,23 @@ footer {
   h3 { font-size: 0.9rem; }
   p, .site-text { font-size: 0.8rem; }
 
-  .site-title {
-    margin-bottom: 35px; /* plus d'espace que sur desktop */
-  }
-  
-  /* Bannière réduite */
-  header.banner img {
-    height: 70px;
-    width: 100%;
-    margin: 0 auto;
-    display: block;
-  }
-
-  /* Menu collé à la bannière */
+  .site-title { margin-bottom: 35px; }
+  header.banner img { height: 70px; width: 100%; margin: 0 auto; display: block; }
   nav { top: 70px; }
+  body { padding-top: 100px; padding-bottom: 0 !important; }
+  footer { padding: 6px 10px; font-size: 0.6rem; width: 100%; margin: 0 auto; border-radius: 8px; }
 
- body {
-    padding-top: 100px;   /* OK pour compenser la bannière + menu réduits */
-    padding-bottom: 0 !important;  /* ⚡ supprime l'espace inutile */
-  }
-  footer { 
-    padding: 6px 10px; 
-    font-size: 0.6rem; 
-    width: 100%; 
-    margin: 0 auto; 
-    border-radius: 8px; 
-  }
-
-
-  /* Contact réduit */
-  .contact-card {
-    max-width: 90%;
-    padding: 10px 8px;
-    font-size: 0.85rem;
-    margin: 0 auto;
-  }
-
-  /* Prénom / Nom empilés */
+  .contact-card { max-width: 90%; padding: 10px 8px; font-size: 0.85rem; margin: 0 auto; }
   .contact-row { flex-direction: column; align-items:center; gap:12px; }
-
   .contact-form { display:flex; flex-direction:column; align-items:center; gap:12px; }
+  .contact-card input, .contact-card textarea { width: 90%; padding: 8px 10px; font-size: 0.85rem; margin: 0 auto; display: block; box-sizing: border-box; }
+  .field.email-field, .field.message-field textarea { width: 90% !important; }
 
-  .contact-card input,
-  .contact-card textarea {
-    width: 90%;
-    padding: 8px 10px;
-    font-size: 0.85rem;
-    margin: 0 auto;
-    display: block;
-    box-sizing: border-box;
-  }
+  .menu-toggle { display: none !important; }
+  .menu-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 10px; }
+  nav a { font-size: 0.75rem; padding: 4px 8px; margin: 0; }
 
-  .field.email-field,
-  .field.message-field textarea { width: 90% !important; }
-
-  /* Toggle burger invisible on smaller screens */
-  .menu-toggle {
-  display: none !important;
-}
-
-  /* Menu links wrap + spacing */
-  .menu-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px 10px;
-  }
-
-  nav a {
-    font-size: 0.75rem;
-    padding: 4px 8px;
-    margin: 0;
-  }
-
-  /* Images cliquables (mobile) */
   .featured-dish img,
   .card img,
-  .gallery img {
-    max-width: 60%;
-    transition: transform 0.3s ease;
-    cursor: zoom-in;
-  }
+  .gallery img { max-width: 60%; transition: transform 0.3s ease; cursor: zoom-in; }
 }
