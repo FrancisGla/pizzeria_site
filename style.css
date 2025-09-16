@@ -342,8 +342,28 @@ h1, h2 { margin-top: 40px; }
 }
 
 /* ===== Footer ===== */
+/* Utiliser flexbox pour "pousser" le footer en bas */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0 !important;
+}
+
+body::after { display: none !important; }
+
+main {
+  flex: 1 0 auto;
+  min-height: 0; /* évite les problèmes de débordement dans certains navigateurs */
+}
+
 footer {
-  position: fixed;
+  /* position: fixed; */ 
+  position: relative; /* plus fixed */ 
   bottom: 0;
   left: 0;
   width: 100%;
@@ -537,7 +557,7 @@ footer {
   /* Menu collé à la bannière */
   nav { top: 70px; }
 
-  body { padding-top: 100px; padding-bottom: 50px; }
+ body { padding-bottom: 0 !important; }
 
   footer { 
     padding: 6px 10px; 
