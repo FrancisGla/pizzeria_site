@@ -488,7 +488,6 @@ footer {
 }
 
 /* ===== Présentation spéciale (À propos) ===== */
-/* ===== Présentation spéciale (À propos) ===== */
 .site-propos {
   background: var(--noir);
   color: var(--or);
@@ -505,6 +504,31 @@ footer {
 .site-propos p {
   margin-bottom: 18px;
 }
+.site-propos ul {
+  list-style: none;             /* Supprime les puces par défaut */
+  padding: 0;
+  margin: 25px auto 0 auto;     /* centre la liste en bloc */
+  text-align: left;            /* aligne le texte des <li> à droite */
+  max-width: 400px;             /* largeur max pour éviter qu'elle prenne tout l'écran */
+  font-size: 18px;
+}
+
+.site-propos ul li {
+  color: var(--or);             /* texte doré */
+  margin-bottom: 8px;
+  font-weight: 500;
+  position: relative;
+}
+
+/* Optionnel : ajouter une puce dorée stylisée à gauche */
+.site-propos ul li::before {
+  content: "•";
+  color: var(--or);
+  position: absolute;
+  right: 100%;                  /* place la puce à gauche du texte */
+  margin-right: 8px;
+}
+
 
 
 
