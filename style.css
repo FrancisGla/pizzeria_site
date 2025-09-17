@@ -487,6 +487,27 @@ footer {
   display: inline-block;
 }
 
+/* ===== Présentation spéciale (À propos) ===== */
+/* ===== Présentation spéciale (À propos) ===== */
+.site-propos {
+  background: var(--noir);
+  color: var(--or);
+  text-align: left;
+  padding: 25px 30px;
+  margin: 30px auto;
+  border: 1px solid var(--or);
+  border-radius: 12px;
+  line-height: 1.7;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  max-width: 900px;
+}
+
+.site-propos p {
+  margin-bottom: 18px;
+}
+
+
+
 .btn-primary:hover {
   background: var(--or-fonce);
   color: var(--blanc);
@@ -547,7 +568,24 @@ footer {
     margin: 0 auto;
   }
 
-  .contact-row { flex-direction: column; align-items:center; gap:12px; }
+  .contact-row {
+    flex-direction: row;        /* champs côte à côte */
+    justify-content: center;    /* centre horizontalement les champs ensemble */
+    align-items: flex-start;    /* alignement vertical au top */
+    gap: 12px;                  /* espace entre les champs */
+    flex-wrap: wrap;            /* permet de passer à la ligne si écran trop petit */
+  }
+
+  .contact-row .field {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  justify-content: center;
+}
+
+  .contact-row .field {
+  flex: 0 0 45%;              /* largeur exacte du champ */
+}
 
   .contact-form { display:flex; flex-direction:column; align-items:center; gap:12px; }
 
@@ -561,8 +599,126 @@ footer {
     box-sizing: border-box;
   }
 
-  .field.email-field,
-  .field.message-field textarea { width: 90% !important; }
+/* Email */
+  .field.email-field {
+    width: 95% !important;
+  }
+
+  /* Message */
+  .field.message-field {
+    width: 95%;       /* largeur du bloc parent */
+    margin: 0 auto;   /* centre le bloc */
+  }
+
+  .field.message-field textarea {
+    width: 90%;      /* prend toute la largeur du parent centré */
+    min-height: 180px;
+    display: block;   /* pour s’assurer que margin fonctionne si nécessaire */
+  }
+
+  .menu-toggle { display: none !important; }
+
+  .menu-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 10px;
+  }
+
+  nav a {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    margin: 0;
+  }
+
+  .featured-dish img,
+  .card img,
+  .gallery img {
+    max-width: 60%;
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
+  }
+}
+
+@media (max-width: 576px) {
+  h1 { font-size: 1.2rem; }
+  h2 { font-size: 1rem; }
+  h3 { font-size: 0.9rem; }
+  p, .site-text { font-size: 0.8rem; }
+
+  .site-title {
+    margin-bottom: 35px;
+  }
+  
+  /* Bannière réduite */
+  header.banner img {
+    height: 70px;
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+  }
+
+  nav { top: 70px; }
+
+  body { padding-top: 100px; padding-bottom: 0px; }
+
+  footer { 
+    padding: 6px 10px; 
+    font-size: 0.6rem; 
+    width: 100%; 
+    margin: 20px auto 0 auto; 
+    border-radius: 8px; 
+  }
+
+  .contact-card {
+    max-width: 90%;
+    padding: 10px 8px;
+    font-size: 0.85rem;
+    margin: 0 auto;
+  }
+
+  .contact-row {
+    width: 90%;
+    flex-direction: row;        /* champs côte à côte */
+    justify-content: center;    /* centre horizontalement les champs ensemble */
+    align-items: flex-start;    /* alignement vertical au top */
+    gap: 12px;                  /* espace entre les champs */
+    flex-wrap: wrap;            /* permet de passer à la ligne si écran trop petit */
+  }
+
+  .contact-row .field {
+    flex: 0 0 90%;              /* chaque champ occupe ~45% de la largeur du conteneur */
+    max-width: 400px;           /* largeur max pour les grands écrans */
+  }
+
+  .contact-form { display:flex; flex-direction:column; align-items:center; gap:12px; }
+
+  .contact-card input,
+  .contact-card textarea {
+    width: 90%;
+    padding: 8px 10px;
+    font-size: 0.85rem;
+    margin: 0 auto;
+    display: block;
+    box-sizing: border-box;
+  }
+
+/* Email */
+  .field.email-field {
+    width: 95% !important;
+  }
+
+  /* Message */
+  .field.message-field {
+    width: 95%;       /* largeur du bloc parent */
+    margin: 0 auto;   /* centre le bloc */
+  }
+
+  .field.message-field textarea {
+    width: 90%;      /* prend toute la largeur du parent centré */
+    min-height: 180px;
+    display: block;   /* pour s’assurer que margin fonctionne si nécessaire */
+  }
 
   .menu-toggle { display: none !important; }
 
