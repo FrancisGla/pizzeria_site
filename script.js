@@ -1,21 +1,29 @@
-// ================== Variables couleurs ==================
+// ================== Variables couleurs (nouvelles + anciennes depuis :root) ==================
 const rootStyles = getComputedStyle(document.documentElement);
 
-const noir       = (rootStyles.getPropertyValue("--noir")        || "#000").trim();
-const noirFonce  = (rootStyles.getPropertyValue("--noir-fonce")  || "#1a1a1a").trim();
-const grisMoyen  = (rootStyles.getPropertyValue("--gris-moyen")  || "#222").trim();
-const grisClair  = (rootStyles.getPropertyValue("--gris-clair")  || "#eee").trim();
+// Anciennes variables (gardées pour compatibilité)
+const noir          = (rootStyles.getPropertyValue("--noir")          || "#000").trim();
+const noirFonce     = (rootStyles.getPropertyValue("--noir-fonce")    || "#1a1a1a").trim();
+const grisMoyen     = (rootStyles.getPropertyValue("--gris-moyen")    || "#222").trim();
+const grisClair     = (rootStyles.getPropertyValue("--gris-clair")    || "#eee").trim();
 const grisPlusClair = (rootStyles.getPropertyValue("--gris-plus-clair") || "#f9f9f9").trim();
-const grisBordure   = (rootStyles.getPropertyValue("--gris-bordure")   || "#555").trim();
-const grisCard      = (rootStyles.getPropertyValue("--gris-card")      || "#666").trim();
+const grisBordure   = (rootStyles.getPropertyValue("--gris-bordure")  || "#555").trim();
+const grisCard      = (rootStyles.getPropertyValue("--gris-card")     || "#666").trim();
 
-const blanc     = (rootStyles.getPropertyValue("--blanc")       || "#fff").trim();
-const or        = (rootStyles.getPropertyValue("--or")          || "#d4af37").trim();
-const orFonce   = (rootStyles.getPropertyValue("--or-fonce")    || "#b08a2e").trim();
-const orClair   = (rootStyles.getPropertyValue("--or-clair")    || "#e6c86e").trim();
+const blanc     = (rootStyles.getPropertyValue("--blanc")     || "#fff").trim();
+const or        = (rootStyles.getPropertyValue("--or")        || "#d4af37").trim();
+const orFonce   = (rootStyles.getPropertyValue("--or-fonce")  || "#b08a2e").trim();
+const orClair   = (rootStyles.getPropertyValue("--or-clair")  || "#e6c86e").trim();
 
 const textePrincipal   = (rootStyles.getPropertyValue("--texte-principal")   || "#F7F7F7").trim();
 const texteSecondaire  = (rootStyles.getPropertyValue("--texte-secondaire")  || "#ccc").trim();
+
+// Nouvelle palette pizzeria Île de Ré
+const rougeTomate  = (rootStyles.getPropertyValue("--rouge-tomate")  || "#D32F2F").trim();
+const vertBasilic  = (rootStyles.getPropertyValue("--vert-basilic")  || "#388E3C").trim();
+const beigeSable   = (rootStyles.getPropertyValue("--beige-sable")   || "#F5F0E6").trim();
+const bleuOcean    = (rootStyles.getPropertyValue("--bleu-ocean")    || "#0277BD").trim();
+const noirArdoise  = (rootStyles.getPropertyValue("--noir-ardoise")  || "#333333").trim();
 
 const disabledBg = "#e0e0e0"; // couleur des champs désactivés
 
@@ -35,7 +43,7 @@ document.addEventListener('click', (e) => {
   links.classList.remove('show');
 });
 
-// ================== FADE-IN IMAGES ==================
+// ================== ANIMATION FADE-IN des images ==================
 document.addEventListener("DOMContentLoaded", () => {
   const imgs = document.querySelectorAll(".gallery img, .card img, .featured-dish img");
   imgs.forEach((img, index) => {
@@ -55,12 +63,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!captchaLabel || !captchaInput || !retryBtn || !form) return;
 
+  // styles dynamiques (issus de la nouvelle palette)
   captchaLabel.style.display = "block";
   captchaLabel.style.textAlign = "center";
   captchaLabel.style.fontWeight = "bold";
   captchaLabel.style.marginBottom = "8px";
   captchaLabel.style.fontSize = "1.3rem";
-  captchaLabel.style.color = or;
+  captchaLabel.style.color = rougeTomate;
 
   captchaInput.style.width = "600px";
   captchaInput.style.textAlign = "center";
@@ -68,14 +77,14 @@ document.addEventListener("DOMContentLoaded", function () {
   captchaInput.style.margin = "10px auto";
   captchaInput.style.fontSize = "1.3rem";
   captchaInput.style.height = "40px";
-  captchaInput.style.borderColor = grisBordure;
+  captchaInput.style.borderColor = bleuOcean;
   captchaInput.style.background = grisPlusClair;
-  captchaInput.style.color = noirFonce;
+  captchaInput.style.color = noirArdoise;
 
-  if (captchaInfo) captchaInfo.style.color = orClair;
+  if (captchaInfo) captchaInfo.style.color = bleuOcean;
 
   if (retryBtn) {
-    retryBtn.style.background = orFonce;
+    retryBtn.style.background = vertBasilic;
     retryBtn.style.color = blanc;
     retryBtn.style.border = "none";
     retryBtn.style.borderRadius = "6px";
@@ -120,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const seconds = timeLeft % 60;
     const formatted = String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
     const fontSize = Math.max(12, Math.floor(clockCanvas.height * 0.6));
-    ctx.fillStyle = or;
+    ctx.fillStyle = rougeTomate;
     ctx.font = `bold ${fontSize}px Arial, sans-serif`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -131,7 +140,9 @@ document.addEventListener("DOMContentLoaded", function () {
     tries++;
     captchaInput.value = "";
     if (captchaInfo) {
-      captchaInfo.innerHTML = `<span class="error-message">${message} Tentatives : ${tries}/3</span>`;
+      captchaInfo.innerHTML = `<span class="error-message">
+        ${message} Tentatives : ${tries}/3
+      </span>`;
     }
     retryBtn.style.display = "inline-block";
 
@@ -150,13 +161,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (captchaInfo) {
         captchaInfo.innerHTML = `
-          <span style="color:${or}; font-weight:bold; font-size:1.2rem;">
+          <span style="color:${rougeTomate}; font-weight:bold; font-size:1.2rem;">
             🚫 3 tentatives échouées.
           </span><br>
-          <button id="reloadBtn" style="margin:10px; padding:10px 20px; background:${or}; color:${noirFonce}; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">
+          <button id="reloadBtn" style="margin:10px; padding:10px 20px; background:${rougeTomate}; color:${beigeSable}; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">
             🔄 Recharger la page
           </button>
-          <button id="homeBtn" style="margin:10px; padding:10px 20px; background:${or}; color:${noirFonce}; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">
+          <button id="homeBtn" style="margin:10px; padding:10px 20px; background:${vertBasilic}; color:${blanc}; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">
             🏠 Retour à l'accueil
           </button>
         `;
@@ -224,62 +235,140 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   let clone = null;
+  let sourceImg = null;
   let cleanupTimer = null;
 
   function removeCloneImmediate() {
     if (cleanupTimer) { clearTimeout(cleanupTimer); cleanupTimer = null; }
-    if (clone && clone.parentNode) clone.parentNode.removeChild(clone);
+    if (clone && clone.parentNode) {
+      clone.parentNode.removeChild(clone);
+    }
     clone = null;
+    sourceImg = null;
     overlay.classList.remove('show');
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
   }
 
   function openZoom(img) {
     if (clone) removeCloneImmediate();
 
+    const rect = img.getBoundingClientRect();
+    sourceImg = img;
     clone = img.cloneNode(true);
     clone.className = 'zoom-clone';
-    clone.style.position = 'fixed';
-    clone.style.left = '50%';
-    clone.style.top = '50%';
-    clone.style.transform = 'translate(-50%, -50%)';
-    clone.style.width = img.width + 'px';
-    clone.style.height = img.height + 'px';
-    clone.style.transition = 'all 300ms ease';
+
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+
+    clone.style.left = cx + 'px';
+    clone.style.top = cy + 'px';
+    clone.style.width = rect.width + 'px';
+    clone.style.height = rect.height + 'px';
+    clone.style.transform = 'translate(-50%,-50%)';
+    clone.style.transition = 'left 300ms ease, top 300ms ease, width 300ms ease, height 300ms ease';
+    clone.style.border = `3px solid ${rougeTomate}`;
 
     document.body.appendChild(clone);
-    overlay.classList.add('show');
 
     const maxW = window.innerWidth * 0.9;
     const maxH = window.innerHeight * 0.9;
-    const scale = Math.min(maxW / img.width, maxH / img.height, 2.8);
+    const scaleW = maxW / rect.width;
+    const scaleH = maxH / rect.height;
+    const scale = Math.min(scaleW, scaleH, 2.8);
+
+    const finalWidth = Math.round(rect.width * scale);
+    const finalHeight = Math.round(rect.height * scale);
+
+    clone.getBoundingClientRect();
+
+    overlay.classList.add('show');
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
 
     requestAnimationFrame(() => {
-      clone.style.width = img.width * scale + 'px';
-      clone.style.height = img.height * scale + 'px';
+      clone.style.left = '50%';
+      clone.style.top = '50%';
+      clone.style.width = finalWidth + 'px';
+      clone.style.height = finalHeight + 'px';
     });
 
-    clone.addEventListener('click', (ev) => { ev.stopPropagation(); closeZoom(); });
+    const onCloneClick = (ev) => {
+      ev.stopPropagation();
+      closeZoom();
+    };
+    clone.addEventListener('click', onCloneClick);
 
-    cleanupTimer = setTimeout(() => { cleanupTimer = null; }, 800);
+    cleanupTimer = setTimeout(() => {
+      cleanupTimer = null;
+    }, 800);
   }
 
-  function closeZoom() {
-    if (!clone) return;
-    clone.remove();
-    clone = null;
+  function closeZoom(forceImmediate = false) {
+    if (!clone || !sourceImg) return;
+
     overlay.classList.remove('show');
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+
+    const rect = sourceImg.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+
+    clone.style.left = cx + 'px';
+    clone.style.top = cy + 'px';
+    clone.style.width = rect.width + 'px';
+    clone.style.height = rect.height + 'px';
+
+    const cleanupFn = function () {
+      if (clone && clone.parentNode) clone.parentNode.removeChild(clone);
+      clone = null;
+      sourceImg = null;
+      if (cleanupTimer) { clearTimeout(cleanupTimer); cleanupTimer = null; }
+      clone && clone.removeEventListener && clone.removeEventListener('click', cleanupFn);
+    };
+
+    let handled = false;
+    const onTransitionEnd = (e) => {
+      if (handled) return;
+      handled = true;
+      if (clone && clone.parentNode) clone.parentNode.removeChild(clone);
+      clone = null;
+      sourceImg = null;
+      if (cleanupTimer) { clearTimeout(cleanupTimer); cleanupTimer = null; }
+    };
+
+    clone.addEventListener('transitionend', onTransitionEnd, { once: true });
+
+    cleanupTimer = setTimeout(() => {
+      if (!handled) {
+        handled = true;
+        removeCloneImmediate();
+      }
+    }, 500);
   }
 
   imgs.forEach(img => {
     img.addEventListener('click', (e) => {
       e.stopPropagation();
-      openZoom(img);
+      if (clone && sourceImg === img) {
+        closeZoom();
+      } else {
+        openZoom(img);
+      }
     });
   });
 
-  overlay.addEventListener('click', closeZoom);
+  overlay.addEventListener('click', () => { if (clone) closeZoom(); });
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.zoom-clone')) {
+      if (clone) closeZoom();
+    }
+  });
+
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && clone) closeZoom();
   });
-  window.addEventListener('resize', () => { if (clone) closeZoom(); });
+
+  window.addEventListener('resize', () => { if (clone) closeZoom(true); });
 });
