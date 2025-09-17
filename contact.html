@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Menu - La Prestige del'Île de Ré</title><link rel="stylesheet" href="style.css?v=4.0">
+<title>Contact - La Prestige du Dolloir | Pizzeria à Chézy-sur-Marne</title>
+<link rel="stylesheet" href="style.css?v=5.0">
   <style>
     #retryCaptcha {
       display: none;
@@ -38,28 +39,33 @@
 <body>
   
 <header class="banner">
+  <h1 class="visually-hidden">La Prestige du Dolloir</h1>
   <img src="images/banner.jpg" alt="Bannière">
 </header>
-
-<<nav>
+<nav>
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   <div class="menu-links">
     <a href="index.html">Accueil</a>
-    <a href="traiteur.html" class="active">Traiteur</a> <!-- ✅ nouvel onglet -->
+    <a href="traiteur.html">Traiteur</a> <!-- ✅ nouvel onglet -->
     <a href="pizza.html">Les pizzas</a>
     <a href="menu.html">La carte</a>
     <a href="galerie.html">Galerie</a>
-    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="active">Contact</a>
     <a href="apropos.html">À propos</a>
   </div>
 </nav>
 
-
-<section>
+<!-- Section carte et adresse -->
+<main>
+<section class="map-section">
   <h2>Contact</h2>
   <p class="site-text">Adresse : 8 Grande Rue, 02570 Chézy-sur-Marne</p>
-  <iframe src="https://www.google.com/maps?q=8+Grande+Rue,+02570+Chézy-sur-Marne&output=embed"
-    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  <p class="site-text">Tèl : 00 00 00 00 00</p>
+  <iframe 
+    src="https://www.google.com/maps?q=8+Grande+Rue,+02570+Chézy-sur-Marne&output=embed"
+    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+    aria-label="Carte de l'emplacement de La Prestige du Dolloir">
+  </iframe>
 </section>
 
 <!-- Section contact -->
@@ -101,6 +107,9 @@
         <!-- Horloge analogique -->
         <canvas id="captchaClock" width="120" height="120" style="display:block; margin:10px auto;"></canvas>
         <p id="timer" class="timer"></p>
+        <noscript>
+          <p class="captcha-info">Activez JavaScript pour afficher et résoudre le captcha.</p>
+        </noscript>
       </div>
 
       <!-- Bouton réessayer -->
@@ -118,9 +127,16 @@
   </div>
 </section>
 
-<h1 class="site-title-bas">La Prestige del'Île de Ré</h1>
+<p class="site-title">La Prestige du Dolloir</p>
+</main>
+
 <footer>
-   <p>© 2025 La Prestige del'Île de Ré - Tous droits réservés - Auteur : Francis Glavieux</p>
+   <p>© 2025 La Prestige du Dolloir - Tous droits réservés - Webdesigner : Francis Glavieux</p>
+   <div class="footer-links">
+     <a href="confidentialite.html">Politique de confidentialité</a>
+     <a href="mentions-legales.html">Mentions légales</a>
+   </div>
+     
   <div class="social-links">
     <a href="https://www.facebook.com/profile.php?id=100063309090268" target="_blank" aria-label="Facebook">
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 24 24">
@@ -137,6 +153,6 @@
 </footer>
 
 <!-- Appel du script -->
-<script src="script.js?v=3.0" defer></script>
+<script src="script.js?v=4.0" defer></script>
 </body>
 </html>
