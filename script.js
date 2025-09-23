@@ -141,6 +141,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     retryBtn.style.display = "inline-block";
 
+     // 🔹 Désactiver le champ après la 1ère erreur
+    captchaInput.disabled = true;
+    captchaInput.style.backgroundColor = disabledBg;
+
     if (tries === 2) {
       clearInterval(timer);
       if (clockCanvas) clockCanvas.style.display = "none";
@@ -176,6 +180,13 @@ document.addEventListener("DOMContentLoaded", function () {
       if (submitBtn) submitBtn.disabled = true;
     }
   }
+   // 🔹 Réactiver quand on clique sur "Nouvelle opération"
+retryBtn.onclick = () => {
+  newOperation();
+  captchaInput.disabled = false;
+  captchaInput.style.backgroundColor = ""; // couleur normale
+  startTimer();
+};
 
   function startTimer() {
     clearInterval(timer);
