@@ -25,12 +25,11 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: url("images/grey-white..jpg") repeat;/* ===== Autre option  no-repeat center center fixed; ===== */
-  background-size: cover;   /* l’image remplit toujours tout l’écran */
-  background-attachment: fixed; /* l’image reste fixe au scroll */
-  background-position: center;  /* toujours centrée */
-  color: var(--noir-ardoise);
-  padding-top: 200px;  /* Compense la bannière fixe + menu */
+  background: linear-gradient(to bottom, var(--gris-fond), var(--gris-fond2)),
+              url('https://www.transparenttextures.com/patterns/marble.png') repeat;
+  color: var(--gris-clair);
+  padding-top: 200px;   /* Compense la bannière fixe + menu */
+  padding-bottom: 0px; /* espace avant le footer */
 }
 
 /* ===== Bannière ===== */
@@ -488,13 +487,6 @@ footer {
   display: inline-block;
 }
 
-.btn-primary:hover {
-  background: var(--or-fonce);
-  color: var(--blanc);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-
 /* ===== Présentation spéciale (À propos) ===== */
 .site-propos {
   background: var(--noir);
@@ -535,6 +527,16 @@ footer {
   position: absolute;
   right: 100%;                  /* place la puce à gauche du texte */
   margin-right: 8px;
+}
+
+
+
+
+.btn-primary:hover {
+  background: var(--or-fonce);
+  color: var(--blanc);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 /* petits éléments */
@@ -662,7 +664,6 @@ footer {
   }
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 576px) {
   h1 { font-size: 1.2rem; }
   h2 { font-size: 1rem; }
