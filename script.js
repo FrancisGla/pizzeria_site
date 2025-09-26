@@ -1,21 +1,29 @@
-// ================== Variables couleurs (lu depuis :root si besoin) ==================
+// ================== Variables couleurs (nouvelles + anciennes depuis :root) ==================
 const rootStyles = getComputedStyle(document.documentElement);
 
-const noir       = (rootStyles.getPropertyValue("--noir")        || "#000").trim();
-const noirFonce  = (rootStyles.getPropertyValue("--noir-fonce")  || "#1a1a1a").trim();
-const grisMoyen  = (rootStyles.getPropertyValue("--gris-moyen")  || "#222").trim();
-const grisClair  = (rootStyles.getPropertyValue("--gris-clair")  || "#eee").trim();
+// Anciennes variables (gardées pour compatibilité)
+const noir          = (rootStyles.getPropertyValue("--noir")          || "#000").trim();
+const noirFonce     = (rootStyles.getPropertyValue("--noir-fonce")    || "#1a1a1a").trim();
+const grisMoyen     = (rootStyles.getPropertyValue("--gris-moyen")    || "#222").trim();
+const grisClair     = (rootStyles.getPropertyValue("--gris-clair")    || "#eee").trim();
 const grisPlusClair = (rootStyles.getPropertyValue("--gris-plus-clair") || "#f9f9f9").trim();
-const grisBordure   = (rootStyles.getPropertyValue("--gris-bordure")   || "#555").trim();
-const grisCard      = (rootStyles.getPropertyValue("--gris-card")      || "#666").trim();
+const grisBordure   = (rootStyles.getPropertyValue("--gris-bordure")  || "#555").trim();
+const grisCard      = (rootStyles.getPropertyValue("--gris-card")     || "#666").trim();
 
-const blanc     = (rootStyles.getPropertyValue("--blanc")       || "#fff").trim();
-const or        = (rootStyles.getPropertyValue("--or")          || "#d4af37").trim();
-const orFonce   = (rootStyles.getPropertyValue("--or-fonce")    || "#b08a2e").trim();
-const orClair   = (rootStyles.getPropertyValue("--or-clair")    || "#e6c86e").trim();
+const blanc     = (rootStyles.getPropertyValue("--blanc")     || "#fff").trim();
+const or        = (rootStyles.getPropertyValue("--or")        || "#d4af37").trim();
+const orFonce   = (rootStyles.getPropertyValue("--or-fonce")  || "#b08a2e").trim();
+const orClair   = (rootStyles.getPropertyValue("--or-clair")  || "#e6c86e").trim();
 
 const textePrincipal   = (rootStyles.getPropertyValue("--texte-principal")   || "#F7F7F7").trim();
 const texteSecondaire  = (rootStyles.getPropertyValue("--texte-secondaire")  || "#ccc").trim();
+
+// Nouvelle palette pizzeria Île de Ré
+const rougeTomate  = (rootStyles.getPropertyValue("--rouge-tomate")  || "#D32F2F").trim();
+const vertBasilic  = (rootStyles.getPropertyValue("--vert-basilic")  || "#388E3C").trim();
+const beigeSable   = (rootStyles.getPropertyValue("--beige-sable")   || "#F5F0E6").trim();
+const bleuOcean    = (rootStyles.getPropertyValue("--bleu-ocean")    || "#0277BD").trim();
+const noirArdoise  = (rootStyles.getPropertyValue("--noir-ardoise")  || "#333333").trim();
 
 const disabledBg = "#e0e0e0"; // couleur des champs désactivés
 
@@ -26,7 +34,6 @@ function toggleMenu() {
   links.classList.toggle('show');
 }
 
-// fermer le menu quand on clique hors menu (en mode mobile)
 document.addEventListener('click', (e) => {
   const links = document.querySelector('.menu-links');
   const toggle = document.querySelector('.menu-toggle');
@@ -56,29 +63,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!captchaLabel || !captchaInput || !retryBtn || !form) return;
 
-  // styles dynamiques (toujours issus du CSS via variables)
+  // styles dynamiques (issus de la nouvelle palette)
   captchaLabel.style.display = "block";
   captchaLabel.style.textAlign = "center";
   captchaLabel.style.fontWeight = "bold";
   captchaLabel.style.marginBottom = "8px";
   captchaLabel.style.fontSize = "1.3rem";
-  captchaLabel.style.color = or; // accent doré
+  captchaLabel.style.color = rougeTomate;
 
-  // champs
   captchaInput.style.width = "600px";
   captchaInput.style.textAlign = "center";
   captchaInput.style.display = "block";
   captchaInput.style.margin = "10px auto";
   captchaInput.style.fontSize = "1.3rem";
   captchaInput.style.height = "40px";
-  captchaInput.style.borderColor = grisBordure;
+  captchaInput.style.borderColor = bleuOcean;
   captchaInput.style.background = grisPlusClair;
-  captchaInput.style.color = noirFonce;
+  captchaInput.style.color = noirArdoise;
 
-  if (captchaInfo) captchaInfo.style.color = orClair;
+  if (captchaInfo) captchaInfo.style.color = bleuOcean;
 
   if (retryBtn) {
-    retryBtn.style.background = orFonce;
+    retryBtn.style.background = vertBasilic;
     retryBtn.style.color = blanc;
     retryBtn.style.border = "none";
     retryBtn.style.borderRadius = "6px";
@@ -86,7 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
     retryBtn.style.cursor = "pointer";
   }
 
-  // logique captcha
   let solution = 0;
   let tries = 0;
   let timer = null;
@@ -124,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const seconds = timeLeft % 60;
     const formatted = String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
     const fontSize = Math.max(12, Math.floor(clockCanvas.height * 0.6));
-    ctx.fillStyle = or;
+    ctx.fillStyle = rougeTomate;
     ctx.font = `bold ${fontSize}px Arial, sans-serif`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -141,9 +146,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     retryBtn.style.display = "inline-block";
 
-     // 🔹 Désactiver le champ après la 1ère erreur
+      // 🔹 Désactiver le champ après la 1ère erreur
     captchaInput.disabled = true;
     captchaInput.style.backgroundColor = disabledBg;
+
 
     if (tries === 2) {
       clearInterval(timer);
@@ -160,13 +166,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (captchaInfo) {
         captchaInfo.innerHTML = `
-          <span style="color:${or}; font-weight:bold; font-size:1.2rem;">
+          <span style="color:${rougeTomate}; font-weight:bold; font-size:1.2rem;">
             🚫 3 tentatives échouées.
           </span><br>
-          <button id="reloadBtn" style="margin:10px; padding:10px 20px; background:${or}; color:${noirFonce}; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">
+          <button id="reloadBtn" style="margin:10px; padding:10px 20px; background:${rougeTomate}; color:${beigeSable}; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">
             🔄 Recharger la page
           </button>
-          <button id="homeBtn" style="margin:10px; padding:10px 20px; background:${or}; color:${noirFonce}; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">
+          <button id="homeBtn" style="margin:10px; padding:10px 20px; background:${vertBasilic}; color:${blanc}; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">
             🏠 Retour à l'accueil
           </button>
         `;
@@ -180,7 +186,8 @@ document.addEventListener("DOMContentLoaded", function () {
       if (submitBtn) submitBtn.disabled = true;
     }
   }
-   // 🔹 Réactiver quand on clique sur "Nouvelle opération"
+
+  // 🔹 Réactiver quand on clique sur "Nouvelle opération"
 retryBtn.onclick = () => {
   newOperation();
   captchaInput.disabled = false;
@@ -233,7 +240,6 @@ window.onload = function () {
 document.addEventListener("DOMContentLoaded", () => {
   const imgs = Array.from(document.querySelectorAll(".featured-dish img, .card img, .gallery img"));
 
-  // create overlay once
   let overlay = document.querySelector('.zoom-overlay');
   if (!overlay) {
     overlay = document.createElement('div');
@@ -258,7 +264,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function openZoom(img) {
-    // if a clone already exists, remove it immediately (no animation)
     if (clone) removeCloneImmediate();
 
     const rect = img.getBoundingClientRect();
@@ -266,7 +271,6 @@ document.addEventListener("DOMContentLoaded", () => {
     clone = img.cloneNode(true);
     clone.className = 'zoom-clone';
 
-    // set initial position & size to match source image center
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
 
@@ -276,10 +280,10 @@ document.addEventListener("DOMContentLoaded", () => {
     clone.style.height = rect.height + 'px';
     clone.style.transform = 'translate(-50%,-50%)';
     clone.style.transition = 'left 300ms ease, top 300ms ease, width 300ms ease, height 300ms ease';
+    clone.style.border = `3px solid ${rougeTomate}`;
 
     document.body.appendChild(clone);
 
-    // compute scale to fit viewport (90% area) but cap at 3x
     const maxW = window.innerWidth * 0.9;
     const maxH = window.innerHeight * 0.9;
     const scaleW = maxW / rect.width;
@@ -289,7 +293,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const finalWidth = Math.round(rect.width * scale);
     const finalHeight = Math.round(rect.height * scale);
 
-    // force reflow then animate to center + final size
     clone.getBoundingClientRect();
 
     overlay.classList.add('show');
@@ -303,16 +306,13 @@ document.addEventListener("DOMContentLoaded", () => {
       clone.style.height = finalHeight + 'px';
     });
 
-    // click on the clone closes it
     const onCloneClick = (ev) => {
       ev.stopPropagation();
       closeZoom();
     };
     clone.addEventListener('click', onCloneClick);
 
-    // safety fallback if transitionend not fired
     cleanupTimer = setTimeout(() => {
-      // keep clone (no-op) — but ensure no duplication later
       cleanupTimer = null;
     }, 800);
   }
@@ -328,13 +328,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
 
-    // animate back to original position/size
     clone.style.left = cx + 'px';
     clone.style.top = cy + 'px';
     clone.style.width = rect.width + 'px';
     clone.style.height = rect.height + 'px';
 
-    // cleanup after transition
     const cleanupFn = function () {
       if (clone && clone.parentNode) clone.parentNode.removeChild(clone);
       clone = null;
@@ -343,7 +341,6 @@ document.addEventListener("DOMContentLoaded", () => {
       clone && clone.removeEventListener && clone.removeEventListener('click', cleanupFn);
     };
 
-    // in some environments transitionend may not fire reliably — use both
     let handled = false;
     const onTransitionEnd = (e) => {
       if (handled) return;
@@ -356,7 +353,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     clone.addEventListener('transitionend', onTransitionEnd, { once: true });
 
-    // fallback remove if transitionend doesn't fire
     cleanupTimer = setTimeout(() => {
       if (!handled) {
         handled = true;
@@ -365,11 +361,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 500);
   }
 
-  // attach handlers to images
   imgs.forEach(img => {
     img.addEventListener('click', (e) => {
       e.stopPropagation();
-      // if same image is zoomed, close
       if (clone && sourceImg === img) {
         closeZoom();
       } else {
@@ -378,7 +372,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // click outside clone closes
   overlay.addEventListener('click', () => { if (clone) closeZoom(); });
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.zoom-clone')) {
@@ -386,12 +379,68 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // escape key closes
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && clone) closeZoom();
   });
 
-  // on resize/orientation change close to avoid misplacement
   window.addEventListener('resize', () => { if (clone) closeZoom(true); });
-
 });
+
+// Sélectionne tous les éléments avec la classe .bg-marbre
+const animatedElements = document.querySelectorAll('.bg-marbre');
+
+animatedElements.forEach(el => {
+  let posX = 50, dirX = 1;
+  let posY = 50, dirY = 1;
+  let opacity = 0.95, dirOpacity = 1;
+
+  // Variation des nuages
+  let cloudScale = 100; // pourcentage
+  let dirCloud = 1;
+  const cloudSpeed = Math.random() * 0.1 + 0.02; // vitesse nuages
+
+  // Vitesse aléatoire des déplacements
+  const speedX = (Math.random() * 0.3 + 0.05).toFixed(3);
+  const speedY = (Math.random() * 0.25 + 0.05).toFixed(3);
+  const opacitySpeed = (Math.random() * 0.002 + 0.001).toFixed(4);
+
+  // Opacité min/max
+  const opacityMin = 0.9 + Math.random() * 0.05;
+  const opacityMax = 1;
+
+  // Variation de teinte
+  let hueShift = Math.random() * 20 - 10;
+  let hueDir = 1;
+
+  function animate() {
+    // Déplacement horizontal/vertical
+    posX += speedX * dirX;
+    if (posX > 100 || posX < 0) dirX *= -1;
+
+    posY += speedY * dirY;
+    if (posY > 100 || posY < 0) dirY *= -1;
+
+    // Variation d’opacité
+    opacity += opacitySpeed * dirOpacity;
+    if (opacity > opacityMax || opacity < opacityMin) dirOpacity *= -1;
+
+    // Variation de teinte
+    hueShift += 0.02 * hueDir;
+    if (hueShift > 15 || hueShift < -15) hueDir *= -1;
+
+    // "Respiration" des nuages
+    cloudScale += cloudSpeed * dirCloud;
+    if (cloudScale > 120 || cloudScale < 90) dirCloud *= -1;
+
+    // Application
+    el.style.backgroundPosition = `${posX}% ${posY}%`;
+    el.style.opacity = opacity;
+    el.style.filter = `hue-rotate(${hueShift}deg)`;
+    el.style.backgroundSize = `${cloudScale}% ${cloudScale}%`;
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+});
+
